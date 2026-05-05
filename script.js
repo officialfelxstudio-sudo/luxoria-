@@ -1,277 +1,206 @@
 /* =============================================
-   LUXORIA - Interactive Scripts
+   LUXORIA — Gaming Scripts
+   script.js
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
     initPreloader();
-    initCrosshair();
-    initGlitchText();
-    initParallax();
-    initParticles();
+    initCanvas();
+    initCardColors();
+    initRipple();
+    initTouchFeedback();
+    initGlitch();
+    initClock();
     initScrollTop();
-    initSoundEffects();
 });
 
-/* Crosshair Follows Mouse */
-function initCrosshair() {
-    const crosshair = document.getElementById('crosshair');
-    if (!crosshair) return;
-
-    // Disable on touch devices
-    if (window.matchMedia('(pointer: coarse)').matches) {
-        crosshair.style.display = 'none';
-        return;
-    }
-
-    let mouseX = 0;
-    let mouseY = 0;
-    let currentX = 0;
-    let currentY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    function animate() {
-        const ease = 0.15;
-        currentX += (mouseX - currentX) * ease;
-        currentY += (mouseY - currentY) * ease;
-
-        crosshair.style.left = currentX + 'px';
-        crosshair.style.top = currentY + 'px';
-
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-}
-
-/* Random Glitch Text Effect */
-function initGlitchText() {
-    const title = document.getElementById('glitchTitle');
-    if (!title) return;
-
-    const originalText = title.textContent;
-    title.setAttribute('data-text', originalText);
-
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
-    let interval = null;
-
-    function glitchEffect() {
-        let iteration = 0;
-        clearInterval(interval);
-
-        interval = setInterval(() => {
-            title.textContent = originalText
-                .split('')
-                .map((char, index) => {
-                    if (index < iteration) {
-                        return originalText[index];
-                    }
-                    return chars[Math.floor(Math.random() * chars.length)];
-                })
-                .join('');
-
-            if (iteration >= originalText.length) {
-                clearInterval(interval);
-                title.textContent = originalText;
-            }
-
-            iteration += 1 / 2;
-        }, 30);
-    }
-
-    // Trigger glitch periodically
-    setInterval(() => {
-        if (Math.random() > 0.6) {
-            glitchEffect();
-        }
-    }, 4000);
-
-    // Trigger on hover
-    title.addEventListener('mouseenter', glitchEffect);
-}
-
-/* Subtle Parallax on Cards */
-function initParallax() {
-    const cards = document.querySelectorAll('.tactical-card');
-
-    if (window.matchMedia('(pointer: coarse)').matches) return;
-
-    document.addEventListener('mousemove', (e) => {
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
-        const moveX = (e.clientX - centerX) / centerX;
-        const moveY = (e.clientY - centerY) / centerY;
-
-        cards.forEach((card, index) => {
-            const depth = (index + 1) * 0.5;
-            const x = moveX * depth * -2;
-            const y = moveY * depth * -2;
-
-            // Only apply if not currently hovered
-            if (!card.matches(':hover')) {
-                card.style.transform = `translate(${x}px, ${y}px)`;
-            }
-        });
-    });
-}
-
-/* Preloader */
+/* ---- Preloader ---- */
 function initPreloader() {
-    const preloader = document.getElementById('preloader');
-    const progress = document.getElementById('preloaderProgress');
-    const percentage = document.getElementById('preloaderPercentage');
-    
-    if (!preloader) return;
-    
-    let width = 0;
-    const interval = setInterval(() => {
-        width += Math.random() * 15;
-        if (width >= 100) {
-            width = 100;
-            clearInterval(interval);
-            setTimeout(() => {
-                preloader.classList.add('hidden');
-            }, 300);
+    const bar = document.getElementById('preBar');
+    const pct = document.getElementById('prePct');
+    const pre = document.getElementById('preloader');
+    if (!pre) return;
+
+    let w = 0;
+    const iv = setInterval(() => {
+        w += Math.random() * 16 + 2;
+        if (w >= 100) {
+            w = 100;
+            clearInterval(iv);
+            setTimeout(() => pre.classList.add('out'), 300);
         }
-        progress.style.width = width + '%';
-        percentage.textContent = Math.floor(width) + '%';
-    }, 100);
+        if (bar) bar.style.width = w + '%';
+        if (pct) pct.textContent = Math.floor(w) + '%';
+    }, 70);
 }
 
-/* Particle Animation */
-function initParticles() {
-    const canvas = document.getElementById('particles');
+/* ---- Animated Canvas Background ---- */
+function initCanvas() {
+    const canvas = document.getElementById('bgCanvas');
     if (!canvas) return;
-    
     const ctx = canvas.getContext('2d');
-    let particles = [];
-    
+
+    let W, H, particles = [], lines = [];
+
     function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
     }
-    
     resize();
     window.addEventListener('resize', resize);
-    
+
+    // Floating particles
     class Particle {
-        constructor() {
-            this.reset();
-        }
-        
+        constructor() { this.reset(); }
         reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 0.5;
-            this.speedY = (Math.random() - 0.5) * 0.5;
-            this.opacity = Math.random() * 0.5 + 0.2;
+            this.x = Math.random() * W;
+            this.y = Math.random() * H;
+            this.size  = Math.random() * 1.5 + 0.3;
+            this.speedX = (Math.random() - 0.5) * 0.3;
+            this.speedY = -Math.random() * 0.5 - 0.1;
+            this.life   = Math.random();
+            this.maxLife = Math.random() * 0.4 + 0.2;
+            this.color  = Math.random() > 0.5 ? '240,192,64' : '0,212,255';
         }
-        
         update() {
             this.x += this.speedX;
             this.y += this.speedY;
-            
-            if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-                this.reset();
-            }
+            this.life -= 0.002;
+            if (this.life <= 0 || this.y < 0) this.reset();
         }
-        
         draw() {
+            const a = Math.min(this.life / this.maxLife, 1) * 0.5;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`;
+            ctx.fillStyle = `rgba(${this.color},${a})`;
             ctx.fill();
         }
     }
-    
-    for (let i = 0; i < 50; i++) {
-        particles.push(new Particle());
+
+    // Slow diagonal grid lines
+    class GridLine {
+        constructor(i) {
+            this.x = (W / 8) * i;
+            this.opacity = Math.random() * 0.04 + 0.01;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.moveTo(this.x, 0);
+            ctx.lineTo(this.x, H);
+            ctx.strokeStyle = `rgba(240,192,64,${this.opacity})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+        }
     }
-    
+
+    for (let i = 0; i < 60; i++) particles.push(new Particle());
+    for (let i = 0; i < 9; i++) lines.push(new GridLine(i));
+
     function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
+        ctx.clearRect(0, 0, W, H);
+        lines.forEach(l => l.draw());
+        particles.forEach(p => { p.update(); p.draw(); });
         requestAnimationFrame(animate);
     }
-    
     animate();
 }
 
-/* Scroll to Top Button */
-function initScrollTop() {
-    const scrollTopBtn = document.getElementById('scrollTop');
-    if (!scrollTopBtn) return;
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            scrollTopBtn.classList.add('visible');
-        } else {
-            scrollTopBtn.classList.remove('visible');
-        }
+/* ---- Apply CSS custom color per card ---- */
+function initCardColors() {
+    document.querySelectorAll('.card').forEach(card => {
+        const c = card.dataset.color;
+        if (c) card.style.setProperty('--c', c);
     });
-    
-    scrollTopBtn.addEventListener('click', () => {
+}
+
+/* ---- Ripple Effect ---- */
+function initRipple() {
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x    = e.clientX - rect.left - size / 2;
+            const y    = e.clientY - rect.top  - size / 2;
+
+            const r = document.createElement('span');
+            r.className = 'ripple';
+            r.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px;`;
+            this.appendChild(r);
+            setTimeout(() => r.remove(), 700);
+        });
+    });
+}
+
+/* ---- Touch press feedback ---- */
+function initTouchFeedback() {
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('touchstart', function() {
+            this.style.transition = 'transform 0.08s ease';
+            this.style.transform  = 'translateX(4px) scale(0.98)';
+        }, { passive: true });
+
+        card.addEventListener('touchend', function() {
+            const el = this;
+            setTimeout(() => {
+                el.style.transform  = '';
+                el.style.transition = '';
+            }, 150);
+        }, { passive: true });
+    });
+}
+
+/* ---- Glitch Title ---- */
+function initGlitch() {
+    const el = document.getElementById('glitchTitle');
+    if (!el) return;
+    el.setAttribute('data-text', el.textContent);
+
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@!%';
+    const original = el.textContent;
+    let iv = null;
+
+    function glitch() {
+        let iter = 0;
+        clearInterval(iv);
+        iv = setInterval(() => {
+            el.textContent = original
+                .split('')
+                .map((ch, i) => i < iter ? original[i] : chars[Math.floor(Math.random() * chars.length)])
+                .join('');
+            if (iter >= original.length) {
+                clearInterval(iv);
+                el.textContent = original;
+            }
+            iter += 0.4;
+        }, 28);
+    }
+
+    // Periodic glitch
+    setInterval(() => { if (Math.random() > 0.5) glitch(); }, 5000);
+    el.addEventListener('mouseenter', glitch);
+}
+
+/* ---- Live Clock in corner ---- */
+function initClock() {
+    const el = document.getElementById('clock');
+    if (!el) return;
+    function tick() {
+        const d = new Date();
+        const pad = n => String(n).padStart(2, '0');
+        el.textContent = `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    }
+    tick();
+    setInterval(tick, 1000);
+}
+
+/* ---- Scroll to Top ---- */
+function initScrollTop() {
+    const btn = document.getElementById('scrollTop');
+    if (!btn) return;
+    window.addEventListener('scroll', () => {
+        btn.classList.toggle('show', window.scrollY > 200);
+    });
+    btn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
-
-/* Sound Effects (Web Audio API) */
-function initSoundEffects() {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    
-    function playHoverSound() {
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.05);
-        
-        gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
-        
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.05);
-    }
-    
-    function playClickSound() {
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.1);
-        
-        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-        
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.1);
-    }
-    
-    const cards = document.querySelectorAll('.tactical-card');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            if (audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
-            playHoverSound();
-        });
-        
-        card.addEventListener('click', () => {
-            playClickSound();
-        });
-    });
-}
-
