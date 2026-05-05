@@ -3,182 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUXORIA` | OFFICIAL LINKS</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="Asset/LOXORIA.png">
-    <link rel="apple-touch-icon" href="Asset/LOXORIA.png">
-    
-    <!-- Meta Tags for Social Media -->
+    <title>LUXORIA | OFFICIAL LINKS</title>
     <meta name="description" content="Support dan connect dengan LUXORIA - Official Links & Support Portal">
-    <meta property="og:title" content="LUXORIA` | OFFICIAL LINKS">
-    <meta property="og:description" content="Support dan connect dengan LUXORIA - Official Links & Support Portal">
-    <meta property="og:image" content="https://stellar-chaja-23c3e4.netlify.app/Asset/LOXORIA.png">
-    <meta property="og:url" content="https://stellar-chaja-23c3e4.netlify.app">
+    <meta property="og:title" content="LUXORIA | OFFICIAL LINKS">
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="LUXORIA` | OFFICIAL LINKS">
-    <meta name="twitter:description" content="Support dan connect dengan LUXORIA - Official Links & Support Portal">
-    <meta name="twitter:image" content="https://stellar-chaja-23c3e4.netlify.app/Asset/LOXORIA.png">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <!-- Preloader -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-content">
-            <div class="preloader-logo">
-                <img src="Asset/LOXORIA.png" alt="LOXORIA">
+    <div id="preloader">
+        <div class="pre-inner">
+            <div class="pre-hex">
+                <svg viewBox="0 0 100 100"><polygon points="50,2 93,26 93,74 50,98 7,74 7,26"/></svg>
+                <span class="pre-letter">L</span>
             </div>
-            <div class="preloader-text">LOADING</div>
-            <div class="preloader-bar">
-                <div class="preloader-progress" id="preloaderProgress"></div>
-            </div>
-            <div class="preloader-percentage" id="preloaderPercentage">0%</div>
+            <div class="pre-name">LUXORIA</div>
+            <div class="pre-track"><div class="pre-fill" id="preBar"></div></div>
+            <div class="pre-pct" id="prePct">0%</div>
         </div>
     </div>
-    
-    <!-- Particle Canvas -->
-    <canvas class="particles" id="particles"></canvas>
-    
-    <div class="bg-grid"></div>
-    
-    <div class="crosshair" id="crosshair"></div>
 
-    <header class="header">
-        <div class="logo-wrap">
-            <img src="Asset/LOXORIA.png" alt="LOXORIA" class="logo-img">
+    <!-- Canvas background -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Scan lines overlay -->
+    <div class="scanlines"></div>
+
+    <!-- Corner UI decorations -->
+    <div class="ui-corner ui-tl">
+        <span class="ui-label">SYS//ONLINE</span>
+    </div>
+    <div class="ui-corner ui-tr">
+        <span class="ui-label" id="clock">00:00:00</span>
+    </div>
+    <div class="ui-corner ui-bl">
+        <span class="ui-label">VER 2.6.0</span>
+    </div>
+    <div class="ui-corner ui-br">
+        <span class="ui-label">LUX-NET</span>
+    </div>
+
+    <!-- Page -->
+    <div class="page" id="page">
+
+        <!-- Header -->
+        <header class="header">
+
+            <!-- Rank badge -->
+            <div class="rank-wrap">
+                <div class="rank-badge">
+                    <div class="rank-hex">
+                        <svg viewBox="0 0 100 100"><polygon points="50,2 93,26 93,74 50,98 7,74 7,26"/></svg>
+                        <img src="Asset/LOXORIA.png" alt="LUXORIA"
+                             id="logoImg"
+                             onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';">
+                        <div class="logo-fallback" id="logoFallback">L</div>
+                    </div>
+                    <div class="rank-rings">
+                        <div class="ring ring-1"></div>
+                        <div class="ring ring-2"></div>
+                        <div class="ring ring-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-text">
+                <div class="clan-tag">[CLAN]</div>
+                <h1 class="title" id="glitchTitle">LUXORIA</h1>
+                <div class="title-sub">
+                    <span class="bar-line"></span>
+                    <span class="sub-text">OFFICIAL LINKS</span>
+                    <span class="bar-line"></span>
+                </div>
+            </div>
+
+            <!-- Stats bar -->
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-label">STATUS</span>
+                    <span class="stat-val online">● ONLINE</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-label">OWNER</span>
+                    <span class="stat-val">feldiantrxahackim_</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-label">CLAN</span>
+                    <span class="stat-val accent">LUX0RIA`</span>
+                </div>
+            </div>
+
+        </header>
+
+        <!-- Section heading -->
+        <div class="section-head">
+            <div class="section-line"></div>
+            <span class="section-title">// NAVIGATION_LINKS</span>
+            <div class="section-line"></div>
         </div>
-        <h1 class="main-title" id="glitchTitle">LUXORIA</h1>
-        <p class="subtitle">Official Links</p>
-    </header>
 
-    <main class="container">
-        <div class="links-grid">
-            
-            <a href="https://sibagi.com/masfel" target="_blank" class="tactical-card" rel="noopener noreferrer">
-                <div class="card-glow"></div>
-                <div class="card-border"></div>
-                <div class="corner corner-tl"></div>
-                <div class="corner corner-tr"></div>
-                <div class="corner corner-bl"></div>
-                <div class="corner corner-br"></div>
-                <div class="card-content">
+        <!-- Links -->
+        <main class="links">
+
+            <!-- Donasi -->
+            <a href="https://sibagi.com/masfel" target="_blank" rel="noopener noreferrer" class="card" data-color="255,200,0">
+                <div class="card-bg"></div>
+                <div class="card-shine"></div>
+                <div class="card-border-anim"></div>
+                <div class="card-num">01</div>
+                <div class="card-icon-wrap">
                     <div class="card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89A6 6 0 0 0 15.1 20H8.9a6 6 0 0 0-.377-7.11"></path><path d="M12 2v2"></path><path d="M12 22v-2"></path></svg>
-                    </div>
-                    <div class="card-text">
-                        <h2>DONASI</h2>
-                        <p>sibagi.com/masfel</p>
-                    </div>
-                    <div class="card-arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
                     </div>
                 </div>
+                <div class="card-text">
+                    <span class="card-title">DONASI</span>
+                    <span class="card-sub">sibagi.com/masfel</span>
+                </div>
+                <div class="card-action">
+                    <span class="action-label">BUKA</span>
+                    <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+                <div class="card-particles"></div>
             </a>
 
-            <a href="https://www.instagram.com/feldiantrxahackim_/" target="_blank" class="tactical-card" rel="noopener noreferrer">
-                <div class="card-glow"></div>
-                <div class="card-border"></div>
-                <div class="corner corner-tl"></div>
-                <div class="corner corner-tr"></div>
-                <div class="corner corner-bl"></div>
-                <div class="corner corner-br"></div>
-                <div class="card-content">
-                    <div class="card-icon instagram">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
-                    </div>
-                    <div class="card-text">
-                        <h2>INSTAGRAM</h2>
-                        <p>@feldiantrxahackim_</p>
-                    </div>
-                    <div class="card-arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/feldiantrxahackim_/" target="_blank" rel="noopener noreferrer" class="card" data-color="255,60,150">
+                <div class="card-bg"></div>
+                <div class="card-shine"></div>
+                <div class="card-border-anim"></div>
+                <div class="card-num">02</div>
+                <div class="card-icon-wrap">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="20" x="2" y="2" rx="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" stroke-width="2.5"/>
+                        </svg>
                     </div>
                 </div>
+                <div class="card-text">
+                    <span class="card-title">INSTAGRAM</span>
+                    <span class="card-sub">@feldiantrxahackim_</span>
+                </div>
+                <div class="card-action">
+                    <span class="action-label">BUKA</span>
+                    <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+                <div class="card-particles"></div>
             </a>
 
-            <a href="https://forms.gle/ERRJdqVwa1ULGAUAA" target="_blank" class="tactical-card clan-card" rel="noopener noreferrer">
-                <div class="card-glow"></div>
-                <div class="card-border"></div>
-                <div class="corner corner-tl"></div>
-                <div class="corner corner-tr"></div>
-                <div class="corner corner-bl"></div>
-                <div class="corner corner-br"></div>
-                <div class="card-content">
-                    <div class="card-icon clan-icon">
-                        <img src="Asset/LOXORIA.png" alt="LOXORIA Logo">
-                    </div>
-                    <div class="card-text">
-                        <h2>JOIN CLAN</h2>
-                        <p>LOXORIA Recruitment</p>
-                    </div>
-                    <div class="card-arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            <!-- Join Clan -->
+            <a href="https://forms.gle/ERRJdqVwa1ULGAUAA" target="_blank" rel="noopener noreferrer" class="card card-featured" data-color="0,220,255">
+                <div class="card-bg"></div>
+                <div class="card-shine"></div>
+                <div class="card-border-anim"></div>
+                <div class="featured-tag">★ REKRUTMEN</div>
+                <div class="card-num">03</div>
+                <div class="card-icon-wrap">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
                     </div>
                 </div>
+                <div class="card-text">
+                    <span class="card-title">JOIN CLAN</span>
+                    <span class="card-sub">LOXORIA Recruitment</span>
+                </div>
+                <div class="card-action">
+                    <span class="action-label">DAFTAR</span>
+                    <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+                <div class="card-particles"></div>
             </a>
 
-            <a href="https://discord.gg/Zrsz3zPTTU" target="_blank" class="tactical-card" rel="noopener noreferrer">
-                <div class="card-glow"></div>
-                <div class="card-border"></div>
-                <div class="corner corner-tl"></div>
-                <div class="corner corner-tr"></div>
-                <div class="corner corner-bl"></div>
-                <div class="corner corner-br"></div>
-                <div class="card-content">
-                    <div class="card-icon discord">
-                        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.44 18.44 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-                    </div>
-                    <div class="card-text">
-                        <h2>DISCORD</h2>
-                        <p>Join Community Server</p>
-                    </div>
-                    <div class="card-arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            <!-- Discord -->
+            <a href="https://discord.gg/Zrsz3zPTTU" target="_blank" rel="noopener noreferrer" class="card" data-color="88,101,242">
+                <div class="card-bg"></div>
+                <div class="card-shine"></div>
+                <div class="card-border-anim"></div>
+                <div class="card-num">04</div>
+                <div class="card-icon-wrap">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.44 18.44 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                        </svg>
                     </div>
                 </div>
+                <div class="card-text">
+                    <span class="card-title">DISCORD</span>
+                    <span class="card-sub">Join Community Server</span>
+                </div>
+                <div class="card-action">
+                    <span class="action-label">GABUNG</span>
+                    <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+                <div class="card-particles"></div>
             </a>
 
-            <a href="https://wa.me/6283110112769" class="tactical-card" rel="noopener noreferrer">
-                <div class="card-glow"></div>
-                <div class="card-border"></div>
-                <div class="corner corner-tl"></div>
-                <div class="corner corner-tr"></div>
-                <div class="corner corner-bl"></div>
-                <div class="corner corner-br"></div>
-                <div class="card-content">
-                    <div class="card-icon whatsapp">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.33 12.33 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.33 12.33 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    </div>
-                    <div class="card-text">
-                        <h2>BANTUAN</h2>
-                        <p>WhatsApp Support</p>
-                    </div>
-                    <div class="card-arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/6283110112769" class="card" rel="noopener noreferrer" data-color="37,211,102">
+                <div class="card-bg"></div>
+                <div class="card-shine"></div>
+                <div class="card-border-anim"></div>
+                <div class="card-num">05</div>
+                <div class="card-icon-wrap">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.33 12.33 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.33 12.33 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
                     </div>
                 </div>
+                <div class="card-text">
+                    <span class="card-title">BANTUAN</span>
+                    <span class="card-sub">WhatsApp Support</span>
+                </div>
+                <div class="card-action">
+                    <span class="action-label">CHAT</span>
+                    <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+                <div class="card-particles"></div>
             </a>
 
-        </div>
-    </main>
+        </main>
 
-    <footer class="footer">
-        <div class="footer-line"></div>
-        <p class="copyright">© feldiantrxahackim_ | OWNER LUX0RIA` 2026</p>
-        <p class="supported-by">Supported by <span class="windsurf-brand">WINDSURF</span></p>
-    </footer>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-divider">
+                <div class="fdiv-line"></div>
+                <div class="fdiv-diamond"></div>
+                <div class="fdiv-line"></div>
+            </div>
+            <p class="footer-copy">© 2026 <span>feldiantrxahackim_</span> · OWNER LUX0RIA`</p>
+            <p class="footer-sys">SYSTEM OPERATIONAL · ALL LINKS VERIFIED</p>
+        </footer>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    </div>
+
+    <!-- Scroll top -->
+    <button id="scrollTop" aria-label="Scroll to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
     </button>
 
-    <!-- Sound Effects (Generated via Web Audio API) -->
     <script src="script.js"></script>
 </body>
 </html>
