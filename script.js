@@ -4,7 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initPreloader();
-    initTacticalUI();
     initCrosshair();
     initGlitchText();
     initParallax();
@@ -184,7 +183,7 @@ function initParticles() {
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, ${Math.floor(Math.random() * 50)}, ${Math.floor(Math.random() * 80)}, ${this.opacity})`;
+            ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`;
             ctx.fill();
         }
     }
@@ -276,65 +275,3 @@ function initSoundEffects() {
     });
 }
 
-/* Tactical UI - Timer, Ping, FPS, Alerts */
-function initTacticalUI() {
-    initMissionTimer();
-    initPingFPS();
-    initAlertMessages();
-}
-
-function initMissionTimer() {
-    const timerEl = document.getElementById('missionTimer');
-    if (!timerEl) return;
-    
-    let seconds = 0;
-    setInterval(() => {
-        seconds++;
-        const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
-        const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
-        const s = String(seconds % 60).padStart(2, '0');
-        timerEl.textContent = `${h}:${m}:${s}`;
-    }, 1000);
-}
-
-function initPingFPS() {
-    const pingEl = document.getElementById('pingValue');
-    const fpsEl = document.getElementById('fpsValue');
-    
-    if (pingEl) {
-        setInterval(() => {
-            const ping = Math.floor(Math.random() * 30) + 5;
-            pingEl.textContent = ping;
-        }, 2000);
-    }
-    
-    if (fpsEl) {
-        setInterval(() => {
-            const fps = Math.floor(Math.random() * 30) + 120;
-            fpsEl.textContent = fps;
-        }, 500);
-    }
-}
-
-function initAlertMessages() {
-    const alertEl = document.getElementById('alertMsg');
-    if (!alertEl) return;
-    
-    const messages = [
-        'ALL SYSTEMS OPERATIONAL',
-        'TACTICAL NETWORK ACTIVE',
-        'ENCRYPTION: ENABLED',
-        'SIGNAL STRENGTH: 100%',
-        'FIREWALL: PROTECTED'
-    ];
-    
-    let index = 0;
-    setInterval(() => {
-        index = (index + 1) % messages.length;
-        alertEl.style.opacity = '0';
-        setTimeout(() => {
-            alertEl.textContent = messages[index];
-            alertEl.style.opacity = '1';
-        }, 300);
-    }, 4000);
-}
