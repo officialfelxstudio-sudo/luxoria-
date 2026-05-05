@@ -41,6 +41,9 @@
         </div>
     </div>
     
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+    
     <!-- Particle Canvas -->
     <canvas class="particles" id="particles"></canvas>
     
@@ -48,6 +51,37 @@
     <div class="bg-grid"></div>
     
     <div class="crosshair" id="crosshair"></div>
+
+    <!-- Top Tactical Bar -->
+    <div class="tactical-bar top-bar">
+        <div class="bar-section">
+            <span class="live-indicator">
+                <span class="live-dot"></span> LIVE
+            </span>
+            <span class="bar-divider">|</span>
+            <span class="mission-timer" id="missionTimer">00:00:00</span>
+        </div>
+        <div class="bar-section center">
+            <span class="threat-level">THREAT: <span class="threat-high">HIGH</span></span>
+        </div>
+        <div class="bar-section right">
+            <span class="ping-display">PING: <span id="pingValue">12</span>ms</span>
+            <span class="bar-divider">|</span>
+            <span class="fps-display">FPS: <span id="fpsValue">144</span></span>
+        </div>
+    </div>
+
+    <!-- Scrolling Ticker -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span class="ticker-item">+++ WELCOME TO LUXORIA TACTICAL NETWORK +++</span>
+            <span class="ticker-item">*** SUPPORT THE STREAM - CLICK DONASI TO DONATE ***</span>
+            <span class="ticker-item">+++ JOIN CLAN LOXORIA - RECRUITMENT OPEN +++</span>
+            <span class="ticker-item">*** FOLLOW INSTAGRAM @feldiantrxahackim_ ***</span>
+            <span class="ticker-item">+++ DISCORD SERVER: discord.gg/Zrsz3zPTTU +++</span>
+            <span class="ticker-item">*** NEED HELP? CLICK BANTUAN WHATSAPP ***</span>
+        </div>
+    </div>
 
     <header class="header">
         <div class="tactical-badge">SYS.ONLINE</div>
@@ -170,6 +204,45 @@
 
         </div>
     </main>
+
+    <!-- System Status HUD -->
+    <div class="system-hud">
+        <div class="hud-item">
+            <span class="hud-label">CPU</span>
+            <div class="hud-bar"><div class="hud-fill cpu-fill"></div></div>
+            <span class="hud-value">42%</span>
+        </div>
+        <div class="hud-item">
+            <span class="hud-label">RAM</span>
+            <div class="hud-bar"><div class="hud-fill ram-fill"></div></div>
+            <span class="hud-value">68%</span>
+        </div>
+        <div class="hud-item">
+            <span class="hud-label">NET</span>
+            <div class="hud-bar"><div class="hud-fill net-fill"></div></div>
+            <span class="hud-value">ONLINE</span>
+        </div>
+        <div class="hud-item">
+            <span class="hud-label">SHIELD</span>
+            <div class="hud-bar"><div class="hud-fill shield-fill"></div></div>
+            <span class="hud-value">100%</span>
+        </div>
+    </div>
+
+    <!-- Bottom Tactical Bar -->
+    <div class="tactical-bar bottom-bar">
+        <div class="bar-section">
+            <span class="coords">LOC: -6.2088°S, 106.8456°E</span>
+        </div>
+        <div class="bar-section center">
+            <span class="alert-msg" id="alertMsg">ALL SYSTEMS OPERATIONAL</span>
+        </div>
+        <div class="bar-section right">
+            <span class="version">V.2.0.26</span>
+            <span class="bar-divider">|</span>
+            <span class="encryption">ENCRYPTED</span>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="footer-line"></div>
