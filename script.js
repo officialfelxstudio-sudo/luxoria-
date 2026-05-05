@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initGlitchText();
     initParallax();
     initParticles();
-    initStatsCounter();
     initScrollTop();
     initSoundEffects();
 });
@@ -203,42 +202,6 @@ function initParticles() {
     }
     
     animate();
-}
-
-/* Stats Counter Animation */
-function initStatsCounter() {
-    const statNumbers = document.querySelectorAll('.stat-number');
-    
-    if (statNumbers.length === 0) return;
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = parseInt(entry.target.getAttribute('data-target'));
-                animateCounter(entry.target, target);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    statNumbers.forEach(stat => observer.observe(stat));
-}
-
-function animateCounter(element, target) {
-    let current = 0;
-    const increment = target / 50;
-    const duration = 2000;
-    const stepTime = duration / 50;
-    
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target.toLocaleString();
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(current).toLocaleString();
-        }
-    }, stepTime);
 }
 
 /* Scroll to Top Button */

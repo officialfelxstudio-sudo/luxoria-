@@ -639,51 +639,6 @@ body:hover .crosshair {
     text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
 }
 
-/* Stats Counter */
-.stats-container {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    padding: 1.5rem 1rem;
-    margin-bottom: 1rem;
-    position: relative;
-    z-index: 10;
-}
-
-.stat-item {
-    text-align: center;
-    padding: 1rem 1.5rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    backdrop-filter: blur(10px);
-    min-width: 100px;
-    transition: all 0.3s ease;
-}
-
-.stat-item:hover {
-    border-color: rgba(0, 229, 255, 0.3);
-    box-shadow: var(--glow-cyan);
-    transform: translateY(-3px);
-}
-
-.stat-number {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: var(--accent-cyan);
-    text-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
-    margin-bottom: 0.3rem;
-}
-
-.stat-label {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-}
-
 /* Scroll to Top Button */
 .scroll-top {
     position: fixed;
