@@ -184,7 +184,7 @@ function initParticles() {
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(0, 229, 255, ${this.opacity})`;
+            ctx.fillStyle = `rgba(255, ${Math.floor(Math.random() * 50)}, ${Math.floor(Math.random() * 80)}, ${this.opacity})`;
             ctx.fill();
         }
     }
