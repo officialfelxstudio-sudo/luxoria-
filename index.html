@@ -4,12 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUXORIA` | OFFICIAL LINKS</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Asset/LOXORIA.png">
+    <link rel="apple-touch-icon" href="Asset/LOXORIA.png">
+    
+    <!-- Meta Tags for Social Media -->
+    <meta name="description" content="Support dan connect dengan LUXORIA - Official Links & Support Portal">
+    <meta property="og:title" content="LUXORIA` | OFFICIAL LINKS">
+    <meta property="og:description" content="Support dan connect dengan LUXORIA - Official Links & Support Portal">
+    <meta property="og:image" content="https://stellar-chaja-23c3e4.netlify.app/Asset/LOXORIA.png">
+    <meta property="og:url" content="https://stellar-chaja-23c3e4.netlify.app">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LUXORIA` | OFFICIAL LINKS">
+    <meta name="twitter:description" content="Support dan connect dengan LUXORIA - Official Links & Support Portal">
+    <meta name="twitter:image" content="https://stellar-chaja-23c3e4.netlify.app/Asset/LOXORIA.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <img src="Asset/LOXORIA.png" alt="LOXORIA">
+            </div>
+            <div class="preloader-text">LOADING</div>
+            <div class="preloader-bar">
+                <div class="preloader-progress" id="preloaderProgress"></div>
+            </div>
+            <div class="preloader-percentage" id="preloaderPercentage">0%</div>
+        </div>
+    </div>
+    
+    <!-- Particle Canvas -->
+    <canvas class="particles" id="particles"></canvas>
+    
     <div class="scanlines"></div>
     <div class="bg-grid"></div>
     
@@ -25,6 +59,22 @@
         </div>
         <p class="subtitle">OFFICIAL LINKS & SUPPORT PORTAL</p>
     </header>
+
+    <!-- Stats Counter -->
+    <div class="stats-container">
+        <div class="stat-item">
+            <div class="stat-number" data-target="1500">0</div>
+            <div class="stat-label">MEMBERS</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="50">0</div>
+            <div class="stat-label">DONATIONS</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="24">0</div>
+            <div class="stat-label">STREAMS</div>
+        </div>
+    </div>
 
     <main class="container">
         <div class="links-grid">
@@ -143,6 +193,12 @@
         <p class="supported-by">Supported by <span class="windsurf-brand">WINDSURF</span></p>
     </footer>
 
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+
+    <!-- Sound Effects (Generated via Web Audio API) -->
     <script src="script.js"></script>
 </body>
 </html>

@@ -3,9 +3,14 @@
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initPreloader();
     initCrosshair();
     initGlitchText();
     initParallax();
+    initParticles();
+    initStatsCounter();
+    initScrollTop();
+    initSoundEffects();
 });
 
 /* Crosshair Follows Mouse */
@@ -110,6 +115,199 @@ function initParallax() {
             if (!card.matches(':hover')) {
                 card.style.transform = `translate(${x}px, ${y}px)`;
             }
+        });
+    });
+}
+
+/* Preloader */
+function initPreloader() {
+    const preloader = document.getElementById('preloader');
+    const progress = document.getElementById('preloaderProgress');
+    const percentage = document.getElementById('preloaderPercentage');
+    
+    if (!preloader) return;
+    
+    let width = 0;
+    const interval = setInterval(() => {
+        width += Math.random() * 15;
+        if (width >= 100) {
+            width = 100;
+            clearInterval(interval);
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+            }, 300);
+        }
+        progress.style.width = width + '%';
+        percentage.textContent = Math.floor(width) + '%';
+    }, 100);
+}
+
+/* Particle Animation */
+function initParticles() {
+    const canvas = document.getElementById('particles');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    
+    resize();
+    window.addEventListener('resize', resize);
+    
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+        
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.5;
+            this.speedY = (Math.random() - 0.5) * 0.5;
+            this.opacity = Math.random() * 0.5 + 0.2;
+        }
+        
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                this.reset();
+            }
+        }
+        
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0, 229, 255, ${this.opacity})`;
+            ctx.fill();
+        }
+    }
+    
+    for (let i = 0; i < 50; i++) {
+        particles.push(new Particle());
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+}
+
+/* Stats Counter Animation */
+function initStatsCounter() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    if (statNumbers.length === 0) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = parseInt(entry.target.getAttribute('data-target'));
+                animateCounter(entry.target, target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    statNumbers.forEach(stat => observer.observe(stat));
+}
+
+function animateCounter(element, target) {
+    let current = 0;
+    const increment = target / 50;
+    const duration = 2000;
+    const stepTime = duration / 50;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target.toLocaleString();
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current).toLocaleString();
+        }
+    }, stepTime);
+}
+
+/* Scroll to Top Button */
+function initScrollTop() {
+    const scrollTopBtn = document.getElementById('scrollTop');
+    if (!scrollTopBtn) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+    
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+/* Sound Effects (Web Audio API) */
+function initSoundEffects() {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playHoverSound() {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.05);
+        
+        gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.05);
+    }
+    
+    function playClickSound() {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.1);
+        
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.1);
+    }
+    
+    const cards = document.querySelectorAll('.tactical-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            playHoverSound();
+        });
+        
+        card.addEventListener('click', () => {
+            playClickSound();
         });
     });
 }
