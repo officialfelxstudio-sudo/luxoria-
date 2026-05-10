@@ -218,7 +218,8 @@ function initReportModal() {
     if (!reportBtn || !modal) return;
 
     // Open modal
-    reportBtn.addEventListener('click', () => {
+    reportBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
     });
@@ -301,29 +302,24 @@ function initReportModal() {
         submitBtn.querySelector('.btn-text').textContent = 'MENGIRIM...';
 
         try {
-            // Create email content
-            let emailBody = `🚨 REPORT MEMBER LUXORIA\n\n`;
-            emailBody += `👤 Nama Member: ${memberName}\n`;
-            emailBody += `⚠️ Masalah: ${problem}\n`;
-            emailBody += `📅 Tanggal: ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}\n`;
-            emailBody += `⏰ Waktu: ${new Date().toLocaleTimeString('id-ID')}\n`;
-
+            const formData = new FormData(reportForm);
             if (file) {
-                emailBody += `\n📎 Bukti: File terlampir (${(file.size / 1024).toFixed(1)} KB)`;
+                formData.append('evidence', file);
             }
 
-            // Encode for mailto
-            const subject = encodeURIComponent('REPORT MEMBER LUXORIA');
-            const body = encodeURIComponent(emailBody);
-            const mailtoUrl = `mailto:officialclanlux0ria@gmail.com?subject=${subject}&body=${body}`;
+            const response = await fetch(reportForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
 
-            // Open email client
-            window.open(mailtoUrl, '_blank');
+            if (!response.ok) {
+                throw new Error('Gagal mengirim report');
+            }
 
-            // Show success popup immediately
             showSuccessPopup();
-
-            // Reset form and close modal
             reportForm.reset();
             filePreview.classList.remove('show');
             filePreview.innerHTML = '';
