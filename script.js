@@ -303,9 +303,6 @@ function initReportModal() {
 
         try {
             const formData = new FormData(reportForm);
-            if (file) {
-                formData.append('evidence', file);
-            }
 
             const response = await fetch(reportForm.action, {
                 method: 'POST',
