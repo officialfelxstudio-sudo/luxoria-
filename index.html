@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUXORIA | OFFICIAL LINKS</title>
+    <title>LUXORIA | OFFICIAL LINK</title>
     <meta name="description" content="Support dan connect dengan LUXORIA - Official Links & Support Portal">
-    <meta property="og:title" content="LUXORIA | OFFICIAL LINKS">
+    <meta property="og:title" content="LUXORIA | OFFICIAL LINK">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -173,7 +173,7 @@
                 </div>
                 <div class="card-text">
                     <span class="card-title">JOIN CLAN</span>
-                    <span class="card-sub">LOXORIA Recruitment</span>
+                    <span class="card-sub">LUXORIA Recruitment</span>
                 </div>
                 <div class="card-action">
                     <span class="action-label">DAFTAR</span>
@@ -207,7 +207,7 @@
             </a>
 
             <!-- WhatsApp -->
-            <a href="https://wa.me/6283110112769" class="card" rel="noopener noreferrer" data-color="37,211,102">
+            <a href="https://wa.me/6283110112769" target="_blank" rel="noopener noreferrer" class="card" data-color="37,211,102">
                 <div class="card-bg"></div>
                 <div class="card-shine"></div>
                 <div class="card-border-anim"></div>
@@ -230,7 +230,76 @@
                 <div class="card-particles"></div>
             </a>
 
+            <!-- Report Member -->
+            <button id="reportBtn" class="card" data-color="255,34,68">
+                <div class="card-bg"></div>
+                <div class="card-shine"></div>
+                <div class="card-border-anim"></div>
+                <div class="featured-tag">⚠ REPORT</div>
+                <div class="card-num">06</div>
+                <div class="card-icon-wrap">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" x2="12" y1="9" y2="13"/>
+                            <line x1="12" x2="12.01" y1="17" y2="17"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="card-text">
+                    <span class="card-title">REPORT MEMBER</span>
+                    <span class="card-sub">Laporkan pelanggaran</span>
+                </div>
+                <div class="card-action">
+                    <span class="action-label">BUKA</span>
+                    <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+                <div class="card-particles"></div>
+            </button>
+
         </main>
+
+        <!-- Report Modal -->
+        <div id="reportModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">REPORT MEMBER</h2>
+                    <button id="closeModal" class="modal-close" aria-label="Close">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                </div>
+                <form id="reportForm" class="report-form">
+                    <div class="form-group">
+                        <label for="memberName" class="form-label">NAMA MEMBER</label>
+                        <input type="text" id="memberName" name="memberName" class="form-input" placeholder="Masukkan nama member..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="problem" class="form-label">MASALAH APA YANG MEMBER LAKUKAN?</label>
+                        <textarea id="problem" name="problem" class="form-textarea" rows="4" placeholder="Jelaskan masalah yang dilakukan member..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="evidence" class="form-label">BUKTI FOTO/VIDEO</label>
+                        <div class="file-upload">
+                            <input type="file" id="evidence" name="evidence" class="file-input" accept="image/*,video/*">
+                            <div class="file-label">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" x2="12" y1="3" y2="15"/>
+                                </svg>
+                                <span>Klik atau drag file ke sini</span>
+                                <span class="file-hint">Maksimal 10MB (JPG, PNG, MP4)</span>
+                            </div>
+                            <div id="filePreview" class="file-preview"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <span class="btn-text">KIRIM REPORT</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
 
         <!-- Footer -->
         <footer class="footer">

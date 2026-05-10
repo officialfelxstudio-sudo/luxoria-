@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initGlitch();
     initClock();
     initScrollTop();
+    initReportModal();
 });
 
 /* ---- Preloader ---- */
@@ -202,5 +203,134 @@ function initScrollTop() {
     });
     btn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+/* ---- Report Modal ---- */
+function initReportModal() {
+    const reportBtn = document.getElementById('reportBtn');
+    const modal = document.getElementById('reportModal');
+    const closeModal = document.getElementById('closeModal');
+    const reportForm = document.getElementById('reportForm');
+    const fileInput = document.getElementById('evidence');
+    const filePreview = document.getElementById('filePreview');
+
+    if (!reportBtn || !modal) return;
+
+    // Open modal
+    reportBtn.addEventListener('click', () => {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Close modal
+    const close = () => {
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    };
+
+    closeModal.addEventListener('click', close);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) close();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) close();
+    });
+
+    // File preview
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) {
+            filePreview.classList.remove('show');
+            filePreview.innerHTML = '';
+            return;
+        }
+
+        // Check file size (max 10MB)
+        if (file.size > 10 * 1024 * 1024) {
+            alert('Ukuran file terlalu besar! Maksimal 10MB.');
+            fileInput.value = '';
+            filePreview.classList.remove('show');
+            filePreview.innerHTML = '';
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const isVideo = file.type.startsWith('video');
+            filePreview.innerHTML = `
+                ${isVideo
+                    ? `<video src="${e.target.result}" controls></video>`
+                    : `<img src="${e.target.result}" alt="Preview">`
+                }
+                <button type="button" class="file-preview-remove">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    Hapus
+                </button>
+            `;
+            filePreview.classList.add('show');
+
+            // Remove file button
+            filePreview.querySelector('.file-preview-remove').addEventListener('click', () => {
+                fileInput.value = '';
+                filePreview.classList.remove('show');
+                filePreview.innerHTML = '';
+            });
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // Form submit
+    reportForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const memberName = document.getElementById('memberName').value.trim();
+        const problem = document.getElementById('problem').value.trim();
+        const file = fileInput.files[0];
+
+        if (!memberName || !problem) {
+            alert('Mohon lengkapi semua field yang wajib diisi!');
+            return;
+        }
+
+        const submitBtn = reportForm.querySelector('.btn-submit');
+        const originalText = submitBtn.querySelector('.btn-text').textContent;
+        submitBtn.disabled = true;
+        submitBtn.querySelector('.btn-text').textContent = 'MENGIRIM...';
+
+        try {
+            let message = `🚨 *REPORT MEMBER LUXORIA*\n\n`;
+            message += `👤 *Nama Member:* ${memberName}\n`;
+            message += `⚠️ *Masalah:* ${problem}\n`;
+            message += `📅 *Tanggal:* ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}\n`;
+            message += `⏰ *Waktu:* ${new Date().toLocaleTimeString('id-ID')}\n`;
+
+            if (file) {
+                message += `\n📎 *Bukti:* File terlampir (${(file.size / 1024).toFixed(1)} KB)`;
+            }
+
+            // Encode message for WhatsApp
+            const encodedMessage = encodeURIComponent(message);
+            const waNumber = '6283110112769';
+            const waUrl = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+
+            // Open WhatsApp
+            window.open(waUrl, '_blank');
+
+            // Reset form and close modal
+            reportForm.reset();
+            filePreview.classList.remove('show');
+            filePreview.innerHTML = '';
+            close();
+
+        } catch (error) {
+            alert('Terjadi kesalahan. Silakan coba lagi.');
+            console.error(error);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.querySelector('.btn-text').textContent = originalText;
+        }
     });
 }
