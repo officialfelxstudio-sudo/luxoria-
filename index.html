@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -76,7 +77,7 @@
                 <h1 class="title" id="glitchTitle">LUXORIA</h1>
                 <div class="title-sub">
                     <span class="bar-line"></span>
-                    <span class="sub-text">OFFICIAL LINKS</span>
+                    <span class="sub-text">OFFICIAL LINK</span>
                     <span class="bar-line"></span>
                 </div>
             </div>
@@ -182,12 +183,39 @@
                 <div class="card-particles"></div>
             </a>
 
+            <!-- Report Member -->
+            <button id="reportBtn" class="card" data-color="255,34,68">
+                <div class="card-bg"></div>
+                <div class="card-shine"></div>
+                <div class="card-border-anim"></div>
+                <div class="featured-tag">⚠ REPORT</div>
+                <div class="card-num">04</div>
+                <div class="card-icon-wrap">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" x2="12" y1="9" y2="13"/>
+                            <line x1="12" x2="12.01" y1="17" y2="17"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="card-text">
+                    <span class="card-title">REPORT MEMBER</span>
+                    <span class="card-sub">Laporkan pelanggaran</span>
+                </div>
+                <div class="card-action">
+                    <span class="action-label">BUKA</span>
+                    <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+                <div class="card-particles"></div>
+            </button>
+
             <!-- Discord -->
             <a href="https://discord.gg/Zrsz3zPTTU" target="_blank" rel="noopener noreferrer" class="card" data-color="88,101,242">
                 <div class="card-bg"></div>
                 <div class="card-shine"></div>
                 <div class="card-border-anim"></div>
-                <div class="card-num">04</div>
+                <div class="card-num">05</div>
                 <div class="card-icon-wrap">
                     <div class="card-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor">
@@ -211,7 +239,7 @@
                 <div class="card-bg"></div>
                 <div class="card-shine"></div>
                 <div class="card-border-anim"></div>
-                <div class="card-num">05</div>
+                <div class="card-num">06</div>
                 <div class="card-icon-wrap">
                     <div class="card-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -268,7 +296,9 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
                     </button>
                 </div>
-                <form id="reportForm" class="report-form">
+                <form id="reportForm" class="report-form" action="https://formspree.io/f/xpznqryq" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_subject" value="REPORT MEMBER LUXORIA">
+                    <input type="hidden" name="_next" value="https://luxoria.netlify.app/thanks.html">
                     <div class="form-group">
                         <label for="memberName" class="form-label">NAMA MEMBER</label>
                         <input type="text" id="memberName" name="memberName" class="form-input" placeholder="Masukkan nama member..." required>

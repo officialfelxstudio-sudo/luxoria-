@@ -301,36 +301,72 @@ function initReportModal() {
         submitBtn.querySelector('.btn-text').textContent = 'MENGIRIM...';
 
         try {
-            let message = `🚨 *REPORT MEMBER LUXORIA*\n\n`;
-            message += `👤 *Nama Member:* ${memberName}\n`;
-            message += `⚠️ *Masalah:* ${problem}\n`;
-            message += `📅 *Tanggal:* ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}\n`;
-            message += `⏰ *Waktu:* ${new Date().toLocaleTimeString('id-ID')}\n`;
-
+            // Create FormData for submission
+            const formData = new FormData();
+            formData.append('memberName', memberName);
+            formData.append('problem', problem);
+            formData.append('_subject', 'REPORT MEMBER LUXORIA');
             if (file) {
-                message += `\n📎 *Bukti:* File terlampir (${(file.size / 1024).toFixed(1)} KB)`;
+                formData.append('evidence', file);
             }
 
-            // Encode message for WhatsApp
-            const encodedMessage = encodeURIComponent(message);
-            const waNumber = '6283110112769';
-            const waUrl = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+            // Submit to Formspree
+            const response = await fetch('https://formspree.io/f/xpznqryq', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
 
-            // Open WhatsApp
-            window.open(waUrl, '_blank');
-
-            // Reset form and close modal
-            reportForm.reset();
-            filePreview.classList.remove('show');
-            filePreview.innerHTML = '';
-            close();
+            if (response.ok) {
+                // Show success popup
+                showSuccessPopup();
+                
+                // Reset form and close modal
+                reportForm.reset();
+                filePreview.classList.remove('show');
+                filePreview.innerHTML = '';
+                close();
+            } else {
+                throw new Error('Failed to send report');
+            }
 
         } catch (error) {
-            alert('Terjadi kesalahan. Silakan coba lagi.');
+            alert('Terjadi kesalahan saat mengirim report. Silakan coba lagi.');
             console.error(error);
         } finally {
             submitBtn.disabled = false;
             submitBtn.querySelector('.btn-text').textContent = originalText;
         }
     });
+
+    // Success popup function
+    function showSuccessPopup() {
+        const popup = document.createElement('div');
+        popup.className = 'success-popup';
+        popup.innerHTML = `
+            <div class="success-popup-content">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22,4 12,14.01 9,11.01"/>
+                    </svg>
+                </div>
+                <h3>TERIMAKASIH SUDAH MELAPOR</h3>
+                <p>Report Anda telah dikirim ke admin. Kami akan segera memprosesnya.</p>
+            </div>
+        `;
+        document.body.appendChild(popup);
+        
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+            popup.classList.add('fade-out');
+            setTimeout(() => {
+                if (popup.parentNode) {
+                    popup.parentNode.removeChild(popup);
+                }
+            }, 300);
+        }, 3000);
+    }
 }
