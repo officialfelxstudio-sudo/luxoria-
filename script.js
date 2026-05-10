@@ -284,13 +284,16 @@ function initReportModal() {
     });
 
     // Form submit
+    const submitFrame = document.querySelector('iframe[name="submitFrame"]');
+
     reportForm.addEventListener('submit', (e) => {
         const memberName = document.getElementById('memberName').value.trim();
+        const reporterName = document.getElementById('reporterName').value.trim();
         const problem = document.getElementById('problem').value.trim();
 
-        if (!memberName || !problem) {
+        if (!memberName || !reporterName || !problem) {
             e.preventDefault();
-            alert('Mohon lengkapi semua field yang wajib diisi!');
+            alert('Mohon isi semua field wajib sebelum mengirim laporan.');
             return;
         }
 
@@ -299,7 +302,7 @@ function initReportModal() {
         submitBtn.disabled = true;
         submitBtn.querySelector('.btn-text').textContent = 'MENGIRIM...';
 
-        setTimeout(() => {
+        const handleSubmitComplete = () => {
             showSuccessPopup();
             reportForm.reset();
             filePreview.classList.remove('show');
@@ -307,7 +310,16 @@ function initReportModal() {
             submitBtn.disabled = false;
             submitBtn.querySelector('.btn-text').textContent = originalText;
             close();
-        }, 600);
+            if (submitFrame) {
+                submitFrame.removeEventListener('load', handleSubmitComplete);
+            }
+        };
+
+        if (submitFrame) {
+            submitFrame.addEventListener('load', handleSubmitComplete);
+        } else {
+            setTimeout(handleSubmitComplete, 1000);
+        }
     });
 
     // Success popup function
