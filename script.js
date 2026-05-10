@@ -284,14 +284,12 @@ function initReportModal() {
     });
 
     // Form submit
-    reportForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
+    reportForm.addEventListener('submit', (e) => {
         const memberName = document.getElementById('memberName').value.trim();
         const problem = document.getElementById('problem').value.trim();
-        const file = fileInput.files[0];
 
         if (!memberName || !problem) {
+            e.preventDefault();
             alert('Mohon lengkapi semua field yang wajib diisi!');
             return;
         }
@@ -301,34 +299,15 @@ function initReportModal() {
         submitBtn.disabled = true;
         submitBtn.querySelector('.btn-text').textContent = 'MENGIRIM...';
 
-        try {
-            const formData = new FormData(reportForm);
-
-            const response = await fetch(reportForm.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Gagal mengirim report');
-            }
-
+        setTimeout(() => {
             showSuccessPopup();
             reportForm.reset();
             filePreview.classList.remove('show');
             filePreview.innerHTML = '';
-            close();
-
-        } catch (error) {
-            alert('Terjadi kesalahan saat mengirim report. Silakan coba lagi.');
-            console.error(error);
-        } finally {
             submitBtn.disabled = false;
             submitBtn.querySelector('.btn-text').textContent = originalText;
-        }
+            close();
+        }, 600);
     });
 
     // Success popup function
