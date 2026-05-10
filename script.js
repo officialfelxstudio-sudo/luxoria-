@@ -301,36 +301,33 @@ function initReportModal() {
         submitBtn.querySelector('.btn-text').textContent = 'MENGIRIM...';
 
         try {
-            // Create FormData for submission
-            const formData = new FormData();
-            formData.append('memberName', memberName);
-            formData.append('problem', problem);
-            formData.append('_subject', 'REPORT MEMBER LUXORIA');
+            // Create email content
+            let emailBody = `🚨 REPORT MEMBER LUXORIA\n\n`;
+            emailBody += `👤 Nama Member: ${memberName}\n`;
+            emailBody += `⚠️ Masalah: ${problem}\n`;
+            emailBody += `📅 Tanggal: ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}\n`;
+            emailBody += `⏰ Waktu: ${new Date().toLocaleTimeString('id-ID')}\n`;
+
             if (file) {
-                formData.append('evidence', file);
+                emailBody += `\n📎 Bukti: File terlampir (${(file.size / 1024).toFixed(1)} KB)`;
             }
 
-            // Submit to Formspree
-            const response = await fetch('https://formspree.io/f/xpznqryq', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
+            // Encode for mailto
+            const subject = encodeURIComponent('REPORT MEMBER LUXORIA');
+            const body = encodeURIComponent(emailBody);
+            const mailtoUrl = `mailto:officialclanlux0ria@gmail.com?subject=${subject}&body=${body}`;
 
-            if (response.ok) {
-                // Show success popup
-                showSuccessPopup();
-                
-                // Reset form and close modal
-                reportForm.reset();
-                filePreview.classList.remove('show');
-                filePreview.innerHTML = '';
-                close();
-            } else {
-                throw new Error('Failed to send report');
-            }
+            // Open email client
+            window.open(mailtoUrl, '_blank');
+
+            // Show success popup immediately
+            showSuccessPopup();
+
+            // Reset form and close modal
+            reportForm.reset();
+            filePreview.classList.remove('show');
+            filePreview.innerHTML = '';
+            close();
 
         } catch (error) {
             alert('Terjadi kesalahan saat mengirim report. Silakan coba lagi.');
