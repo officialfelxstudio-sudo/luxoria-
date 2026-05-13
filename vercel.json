@@ -3,7 +3,6 @@
   "outputDirectory": ".",
   "env": {},
   "regions": ["sin1"],
-  "functions": {},
   "redirects": [
     {
       "source": "/(.*)",
