@@ -192,10 +192,15 @@ body {
 /* ---- Header ---- */
 .header {
     text-align: center;
-    padding: 3rem 0 4rem;
-    background: linear-gradient(135deg, rgba(15,15,35,0.7), rgba(26,26,46,0.7));
+    padding: 4rem 1rem 4.5rem;
+    background: linear-gradient(180deg, rgba(4,4,12,0.55), rgba(14,14,28,0.65));
     position: relative;
     z-index: 15;
+    min-height: 62vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 /* Rank / Avatar */
@@ -332,6 +337,57 @@ body {
     gap: 0.75rem;
     margin-top: 0.6rem;
 }
+.hero-tagline {
+    margin-top: 0.9rem;
+    font-family: var(--font-body);
+    color: var(--muted);
+    opacity: 0.9;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+}
+.hero-ctas {
+    display: flex;
+    gap: 0.9rem;
+    margin-top: 1.2rem;
+    align-items: center;
+    justify-content: center;
+}
+.btn-cta, .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 1.6rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-family: var(--font-hud);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: transform 300ms cubic-bezier(.2,.9,.2,1), box-shadow 300ms ease, background 300ms ease;
+}
+.btn-cta {
+    background: linear-gradient(90deg, rgba(0,180,224,1), rgba(139,92,246,0.9));
+    color: #041025;
+    box-shadow: 0 12px 30px rgba(0,180,224,0.15), 0 2px 8px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.04);
+}
+.btn-cta:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 50px rgba(0,180,224,0.18); }
+.btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(4px);
+}
+.btn-ghost:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+/* accent pulse for active CTA */
+.btn-cta:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    pointer-events: none;
+}
 .bar-line {
     flex: 1;
     max-width: 60px;
@@ -416,9 +472,9 @@ body {
 .links {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 3rem 1rem;
-    max-width: 420px;
+    gap: 0.9rem;
+    padding: 2rem 1rem 4rem;
+    max-width: 680px;
     margin: 0 auto 4rem;
     width: 100%;
     flex: 1;
@@ -471,10 +527,10 @@ body {
 
 /* Card hover */
 .card:hover {
-    border-color: rgba(var(--c), 0.12);
-    transform: translateY(-6px) scale(1.01);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.45), 0 6px 18px rgba(0,180,224,0.08);
-    background: linear-gradient(180deg, rgba(31,31,58,1), rgba(24,24,40,1));
+    border-color: rgba(var(--c), 0.18);
+    transform: translateY(-6px) scale(1.01) rotateZ(-0.2deg);
+    box-shadow: 0 28px 60px rgba(2,6,24,0.6), 0 8px 22px rgba(var(--c), 0.09);
+    background: linear-gradient(180deg, rgba(28,28,46,1), rgba(18,18,34,1));
 }
 .card:active {
     transform: translateY(-3px) scale(0.995);
@@ -547,7 +603,7 @@ body {
     border: 1px solid rgba(var(--c), 0.06);
     display: flex; align-items: center; justify-content: center;
     transition: transform var(--dur) ease, box-shadow var(--dur) ease, background var(--dur) ease;
-}
+.card-icon-wrap { position: relative; }
 .card:hover .card-icon-wrap {
     transform: translateY(-3px) scale(1.04);
     background: rgba(var(--c), 0.12);
@@ -572,10 +628,10 @@ body {
 .card-title {
     font-family: var(--font-hud);
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.06em;
     color: var(--text);
-    transition: color var(--dur) ease;
+    transition: color var(--dur) ease, text-shadow 300ms ease;
 }
 .card:hover .card-title { color: rgba(var(--c), 1); }
 
@@ -708,7 +764,7 @@ body {
 @media (max-width: 768px) {
     .links {
         grid-template-columns: 1fr;
-        padding: 2rem 1rem;
+        padding: 1.8rem 1rem;
     }
     .card {
         min-height: auto;
