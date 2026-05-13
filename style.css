@@ -1,5 +1,5 @@
 /* =============================================
-   LUXORIA — Gaming UI Theme
+   LUXORIA — Epic Games Launcher Inspired UI
    style.css
    ============================================= */
 
@@ -7,17 +7,17 @@
 
 /* ---- Variables ---- */
 :root {
-    --bg:       #05050a;
-    --bg2:      #090912;
-    --surface:  #0d0d18;
-    --surface2: #13131f;
-    --gold:     #f0c040;
-    --cyan:     #00d4ff;
-    --red:      #ff2244;
-    --text:     #e8e8f0;
-    --muted:    #606078;
-    --border:   rgba(255,255,255,0.07);
-    --font-hud: 'Rajdhani', sans-serif;
+    --bg:         #0f0f23;
+    --bg2:        #1a1a2e;
+    --surface:    #1f1f3a;
+    --surface2:   #2a2a4e;
+    --epic-blue:  #00b4e0;
+    --epic-purple:#8b5cf6;
+    --accent:     #00d4ff;
+    --text:       #ffffff;
+    --muted:      #a0a0b0;
+    --border:     rgba(255,255,255,0.1);
+    --font-hud:   'Rajdhani', sans-serif;
     --font-body:'Exo 2', sans-serif;
 }
 
@@ -125,7 +125,7 @@ body {
     inset: 0;
     width: 100%; height: 100%;
     fill: none;
-    stroke: var(--gold);
+    stroke: var(--epic-blue);
     stroke-width: 2;
     animation: hex-rotate 4s linear infinite;
 }
@@ -135,10 +135,10 @@ body {
     font-family: var(--font-hud);
     font-size: 2rem;
     font-weight: 700;
-    color: var(--gold);
+    color: var(--epic-blue);
     position: relative;
     z-index: 1;
-    text-shadow: 0 0 20px rgba(240,192,64,0.6);
+    text-shadow: 0 0 20px rgba(0,180,224,0.6);
 }
 
 .pre-name {
@@ -157,10 +157,10 @@ body {
 }
 .pre-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--gold), var(--cyan));
+    background: linear-gradient(90deg, var(--epic-blue), var(--accent));
     width: 0%;
     transition: width 0.08s linear;
-    box-shadow: 0 0 10px var(--gold);
+    box-shadow: 0 0 10px var(--epic-blue);
 }
 
 .pre-pct {
@@ -216,9 +216,9 @@ body {
     inset: 0;
     width: 100%; height: 100%;
     fill: var(--surface2);
-    stroke: var(--gold);
+    stroke: var(--epic-blue);
     stroke-width: 3;
-    filter: drop-shadow(0 0 8px rgba(240,192,64,0.4));
+    filter: drop-shadow(0 0 8px rgba(0,180,224,0.4));
 }
 .rank-hex img {
     width: 50px; height: 50px;
@@ -244,17 +244,17 @@ body {
 }
 .ring-1 {
     width: 90px; height: 90px;
-    border-color: rgba(240,192,64,0.25);
+    border-color: rgba(0,180,224,0.25);
     animation: ring-spin 8s linear infinite;
 }
 .ring-2 {
     width: 104px; height: 104px;
-    border-top-color: rgba(0,212,255,0.3);
+    border-top-color: rgba(139,92,246,0.3);
     animation: ring-spin 12s linear infinite reverse;
 }
 .ring-3 {
     width: 118px; height: 118px;
-    border-color: rgba(255,34,68,0.15);
+    border-color: rgba(0,212,255,0.15);
     border-style: dashed;
     animation: ring-spin 20s linear infinite;
 }
@@ -278,7 +278,7 @@ body {
     color: var(--text);
     line-height: 1;
     text-shadow:
-        0 0 40px rgba(240,192,64,0.2),
+        0 0 40px rgba(0,180,224,0.2),
         0 0 80px rgba(0,212,255,0.1);
     position: relative;
     display: inline-block;
@@ -295,13 +295,13 @@ body {
     color: inherit;
 }
 .title::before {
-    color: var(--cyan);
+    color: var(--epic-blue);
     clip-path: inset(20% 0 60% 0);
     animation: glitch-top 4s infinite;
     opacity: 0;
 }
 .title::after {
-    color: var(--red);
+    color: var(--epic-purple);
     clip-path: inset(60% 0 10% 0);
     animation: glitch-bot 4s infinite;
     opacity: 0;
@@ -330,10 +330,10 @@ body {
     flex: 1;
     max-width: 60px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold));
+    background: linear-gradient(90deg, transparent, var(--epic-blue));
 }
 .bar-line:last-child {
-    background: linear-gradient(90deg, var(--gold), transparent);
+    background: linear-gradient(90deg, var(--epic-blue), transparent);
 }
 .sub-text {
     font-family: var(--font-hud);
@@ -374,7 +374,7 @@ body {
     color: var(--text);
 }
 .stat-val.online { color: #00e676; }
-.stat-val.accent { color: var(--gold); }
+.stat-val.accent { color: var(--epic-blue); }
 
 .stat-divider {
     width: 1px;
@@ -460,7 +460,7 @@ body {
 }
 
 /* Dynamic color per card */
-.card { --c: 240,192,64; }
+.card { --c: 0,180,224; }
 
 /* Card background tint on hover */
 .card-bg {
@@ -596,7 +596,7 @@ body {
 .featured-tag {
     position: absolute;
     top: -1px; right: 2.5rem;
-    background: var(--gold);
+    background: var(--epic-blue);
     color: #000;
     font-family: var(--font-hud);
     font-size: 0.55rem;
@@ -641,7 +641,7 @@ body {
 }
 .fdiv-diamond {
     width: 6px; height: 6px;
-    background: var(--gold);
+    background: var(--epic-blue);
     transform: rotate(45deg);
     opacity: 0.5;
 }
@@ -653,7 +653,7 @@ body {
     letter-spacing: 0.1em;
     color: var(--muted);
 }
-.footer-copy span { color: var(--gold); }
+.footer-copy span { color: var(--epic-blue); }
 
 .footer-sys {
     font-family: var(--font-hud);
@@ -683,12 +683,12 @@ body {
     opacity: 1; visibility: visible; transform: translateY(0);
 }
 #scrollTop:hover {
-    border-color: var(--gold);
-    box-shadow: 0 0 12px rgba(240,192,64,0.2);
+    border-color: var(--epic-blue);
+    box-shadow: 0 0 12px rgba(0,180,224,0.2);
 }
 #scrollTop svg {
     width: 16px; height: 16px;
-    color: var(--gold);
+    color: var(--epic-blue);
 }
 
 /* ---- Responsive ---- */
