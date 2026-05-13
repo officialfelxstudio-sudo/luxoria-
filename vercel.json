@@ -1,7 +1,7 @@
 {
   "buildCommand": "echo 'Static site - no build needed'",
   "outputDirectory": ".",
-  "env": [],
+  "env": {},
   "regions": ["sin1"],
   "functions": {},
   "redirects": [
