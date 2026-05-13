@@ -21,6 +21,15 @@
     --font-body:'Exo 2', sans-serif;
 }
 
+@keyframes parallax-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+@keyframes bounce-scroll {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(8px); opacity: 1; }
+}
+
 /* ---- Reset ---- */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
@@ -31,6 +40,20 @@ body {
     color: var(--text);
     min-height: 100vh;
     overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, 
+        rgba(15,15,35,1) 0%,
+        rgba(25,15,50,0.8) 25%,
+        rgba(15,25,50,0.7) 50%,
+        rgba(20,15,40,0.9) 75%,
+        rgba(15,15,35,1) 100%);
+    pointer-events: none;
+    z-index: -1;
 }
 
 /* ---- Canvas ---- */
@@ -193,7 +216,9 @@ body {
 .header {
     text-align: center;
     padding: 4rem 1rem 4.5rem;
-    background: linear-gradient(180deg, rgba(4,4,12,0.55), rgba(14,14,28,0.65));
+    background: linear-gradient(180deg, rgba(4,4,12,0.25), rgba(14,14,28,0.3));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     position: relative;
     z-index: 15;
     min-height: 62vh;
@@ -201,6 +226,8 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
 /* Rank / Avatar */
@@ -284,7 +311,7 @@ body {
 .title {
     font-family: var(--font-hud);
     font-size: clamp(2.4rem, 10vw, 4rem);
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.15em;
     color: var(--text);
     line-height: 1;
@@ -294,6 +321,7 @@ body {
     position: relative;
     display: inline-block;
     cursor: default;
+    animation: parallax-float 4s ease-in-out infinite;
 }
 
 /* Glitch layers */
@@ -493,8 +521,10 @@ body {
     align-items: center;
     gap: 1rem;
     padding: 0.95rem 1.25rem;
-    background: linear-gradient(180deg, rgba(31,31,58,0.95), rgba(26,26,46,0.95));
-    border: 1px solid rgba(255,255,255,0.04);
+    background: linear-gradient(135deg, rgba(31,31,58,0.5), rgba(26,26,46,0.4));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: var(--btn-radius);
     text-decoration: none;
     color: var(--text);
@@ -527,10 +557,10 @@ body {
 
 /* Card hover */
 .card:hover {
-    border-color: rgba(var(--c), 0.18);
+    border-color: rgba(var(--c), 0.25);
     transform: translateY(-6px) scale(1.01) rotateZ(-0.2deg);
-    box-shadow: 0 28px 60px rgba(2,6,24,0.6), 0 8px 22px rgba(var(--c), 0.09);
-    background: linear-gradient(180deg, rgba(28,28,46,1), rgba(18,18,34,1));
+    box-shadow: 0 28px 60px rgba(2,6,24,0.6), 0 8px 22px rgba(var(--c), 0.15), 0 0 40px rgba(var(--c), 0.1);
+    background: linear-gradient(135deg, rgba(31,31,58,0.75), rgba(26,26,46,0.6));
 }
 .card:active {
     transform: translateY(-3px) scale(0.995);
@@ -600,14 +630,15 @@ body {
     width: 48px; height: 48px;
     border-radius: 10px;
     background: rgba(var(--c), 0.06);
-    border: 1px solid rgba(var(--c), 0.06);
+    border: 1px solid rgba(var(--c), 0.1);
     display: flex; align-items: center; justify-content: center;
     transition: transform var(--dur) ease, box-shadow var(--dur) ease, background var(--dur) ease;
-.card-icon-wrap { position: relative; }
+    position: relative;
+}
 .card:hover .card-icon-wrap {
     transform: translateY(-3px) scale(1.04);
-    background: rgba(var(--c), 0.12);
-    box-shadow: 0 6px 18px rgba(var(--c), 0.08);
+    background: rgba(var(--c), 0.15);
+    box-shadow: 0 0 24px rgba(var(--c), 0.12), 0 6px 18px rgba(var(--c), 0.08);
 }
 .card-icon {
     display: flex; align-items: center; justify-content: center;
@@ -633,7 +664,10 @@ body {
     color: var(--text);
     transition: color var(--dur) ease, text-shadow 300ms ease;
 }
-.card:hover .card-title { color: rgba(var(--c), 1); }
+.card:hover .card-title { 
+    color: rgba(var(--c), 1); 
+    text-shadow: 0 0 16px rgba(var(--c), 0.3);
+}
 
 .card-sub {
     display: none;
@@ -747,9 +781,11 @@ body {
     transform: translateY(10px);
     transition: all 0.3s ease;
     z-index: 100;
+    animation: bounce-scroll 2s ease-in-out infinite;
 }
 #scrollTop.show {
     opacity: 1; visibility: visible; transform: translateY(0);
+    animation: none;
 }
 #scrollTop:hover {
     border-color: var(--epic-blue);
