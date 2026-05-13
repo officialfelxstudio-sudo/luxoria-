@@ -1,375 +1,349 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUXORIA | OFFICIAL LINK</title>
-    <meta name="description" content="Support dan connect dengan LUXORIA - Official Links & Support Portal">
-    <meta property="og:title" content="LUXORIA | OFFICIAL LINK">
-    <meta property="og:type" content="website">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUX0RIA</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --c0: #050608; --c1: #0c0d12; --c2: #111318; --c3: #1a1c24; --c4: #252830;
+  --line: #2a2d38; --dim: #3a3e4f; --mute: #5a6070; --text: #c8ccd8;
+  --bright: #e8ecf5; --white: #f0f4ff;
+  --acc: #b8ff00; --acc2: #ff4444; --acc3: #00aaff; --acc-dim: #8fcc00;
+  --font-hud: 'Share Tech Mono', monospace;
+  --font-title: 'Orbitron', sans-serif;
+  --font-ui: 'Rajdhani', sans-serif;
+}
+html, body { height: 100%; background: var(--c0); color: var(--text); font-family: var(--font-ui); overflow-x: hidden; cursor: crosshair; }
+body::before { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.1) 2px, rgba(0,0,0,.1) 4px); pointer-events: none; z-index: 9999; }
+.bg-grid { position: fixed; inset: 0; background-image: linear-gradient(rgba(42,45,56,.25) 1px, transparent 1px), linear-gradient(90deg, rgba(42,45,56,.25) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; z-index: 0; }
+.bg-grid::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 90% at 50% 50%, transparent 0%, rgba(5,6,8,.85) 100%); }
+
+/* HEADER */
+header { position: fixed; top: 0; left: 0; right: 0; z-index: 500; height: 56px; background: rgba(5,6,8,.96); border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
+header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent 0%, var(--acc) 50%, transparent 100%); opacity: .35; }
+.logo-wrap { display: flex; align-items: center; gap: 10px; }
+.logo-text { font-family: var(--font-title); font-size: 18px; font-weight: 900; letter-spacing: 4px; color: var(--white); }
+.logo-text em { color: var(--acc); font-style: normal; position: relative; }
+.logo-text em::before { content: attr(data-t); position: absolute; top: 0; left: 0; color: var(--acc2); clip-path: polygon(0 30%,100% 30%,100% 55%,0 55%); transform: translateX(-2px); animation: glitch 5s infinite; }
+@keyframes glitch { 0%,88%,100%{opacity:0;transform:translateX(0)} 90%{opacity:.9;transform:translateX(-3px)} 93%{opacity:.9;transform:translateX(3px)} 96%{opacity:0} }
+
+.hud-status { font-family: var(--font-hud); font-size: 10px; color: var(--mute); letter-spacing: 2px; display: flex; align-items: center; gap: 14px; }
+.hud-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 6px var(--acc); animation: blink 1.8s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+.help-btn { background: none; border: 1px solid var(--line); color: var(--mute); font-family: var(--font-hud); font-size: 10px; letter-spacing: 2px; padding: 6px 14px; cursor: crosshair; transition: all .2s; display: flex; align-items: center; gap: 8px; clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); }
+.help-btn:hover { border-color: var(--acc); color: var(--acc); background: rgba(184,255,0,.05); }
+
+/* BANTUAN PANEL */
+.help-panel { position: fixed; top: 56px; left: 0; right: 0; z-index: 490; background: rgba(5,6,8,.97); border-bottom: 1px solid var(--line); transform: translateY(-110%); transition: transform .4s cubic-bezier(.4,0,.2,1); }
+.help-panel.open { transform: translateY(0); }
+.help-panel-inner { display: flex; justify-content: center; gap: 1px; max-width: 600px; margin: 0 auto; background: var(--line); }
+.help-item { flex: 1; background: var(--c1); padding: 18px 16px; text-align: center; text-decoration: none; color: var(--mute); font-family: var(--font-hud); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; transition: all .2s; display: flex; flex-direction: column; align-items: center; gap: 10px; position: relative; overflow: hidden; }
+.help-item::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--acc); transform: scaleX(0); transition: transform .25s; }
+.help-item:hover::after { transform: scaleX(1); }
+.help-item:hover { background: rgba(184,255,0,.04); color: var(--acc); }
+.help-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+/* PAGE */
+.page { min-height: 100vh; padding-top: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+.section { width: 100%; max-width: 480px; padding: 40px 24px 60px; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+
+/* HOME VIEW */
+#view-home { display: flex; flex-direction: column; align-items: center; transition: opacity .3s, transform .3s; }
+#view-home.exit { opacity: 0; transform: translateX(-40px); pointer-events: none; position: absolute; }
+#view-menu { display: none; flex-direction: column; align-items: stretch; opacity: 0; transform: translateX(40px); transition: opacity .35s, transform .35s; }
+#view-menu.enter { display: flex; opacity: 1; transform: translateX(0); }
+
+.kill-tag { font-family: var(--font-hud); font-size: 9px; letter-spacing: 3px; color: var(--mute); text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.kill-tag::before, .kill-tag::after { content: ''; height: 1px; width: 28px; background: var(--line); }
+
+.main-title { font-family: var(--font-title); font-size: clamp(40px,10vw,68px); font-weight: 900; letter-spacing: 8px; color: var(--white); text-align: center; line-height: 1; margin-bottom: 6px; }
+.main-title em { color: var(--acc); font-style: normal; }
+.tagline { font-family: var(--font-hud); font-size: 10px; letter-spacing: 4px; color: var(--mute); text-align: center; margin-bottom: 50px; }
+
+/* DONATE BUTTON */
+.btn-donate { display: block; width: 100%; text-decoration: none; margin-bottom: 4px; position: relative; }
+.btn-donate-inner { display: flex; align-items: center; justify-content: center; gap: 12px; background: var(--acc); color: var(--c0); font-family: var(--font-title); font-size: 14px; font-weight: 700; letter-spacing: 5px; padding: 20px 32px; clip-path: polygon(16px 0%,100% 0%,calc(100% - 16px) 100%,0% 100%); transition: all .2s; position: relative; overflow: hidden; }
+.btn-donate-inner::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,.18); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+.btn-donate:hover .btn-donate-inner::before { transform: scaleX(1); }
+.btn-donate:hover .btn-donate-inner { background: #ccff22; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(184,255,0,.25); }
+.btn-donate:active .btn-donate-inner { transform: translateY(0); box-shadow: none; }
+.btn-donate svg { flex-shrink: 0; }
+
+/* VIEW MORE */
+.viewmore-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 22px; }
+.btn-viewmore { background: none; border: none; font-family: var(--font-hud); font-size: 9px; letter-spacing: 3px; color: var(--mute); cursor: crosshair; padding: 6px 16px; text-transform: uppercase; transition: color .2s; display: flex; align-items: center; gap: 8px; }
+.btn-viewmore:hover { color: var(--acc); }
+.vm-arrows { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.vm-arr { width: 8px; height: 5px; border-left: 1px solid var(--mute); border-bottom: 1px solid var(--mute); transform: rotate(-45deg); animation: bd 1.5s ease-in-out infinite; }
+.vm-arr:nth-child(2) { animation-delay: .15s; opacity: .55; }
+.vm-arr:nth-child(3) { animation-delay: .3s; opacity: .25; }
+.btn-viewmore:hover .vm-arr { border-color: var(--acc); }
+@keyframes bd { 0%,100%{transform:rotate(-45deg) translateY(0)} 50%{transform:rotate(-45deg) translateY(4px)} }
+
+/* MENU */
+.menu-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--line); width: 100%; }
+.menu-hud { font-family: var(--font-hud); font-size: 9px; letter-spacing: 3px; color: var(--mute); }
+.btn-back { background: none; border: 1px solid var(--line); color: var(--mute); font-family: var(--font-hud); font-size: 9px; letter-spacing: 2px; padding: 5px 12px; cursor: crosshair; transition: all .2s; clip-path: polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%); }
+.btn-back:hover { border-color: var(--acc); color: var(--acc); background: rgba(184,255,0,.05); }
+
+/* LINK BUTTONS */
+.btn-link { display: flex; align-items: stretch; text-decoration: none; background: none; border: none; width: 100%; cursor: crosshair; padding: 0; margin-bottom: 5px; }
+.btn-link-body { flex: 1; display: flex; align-items: center; gap: 14px; padding: 13px 16px; background: var(--c2); border: 1px solid var(--line); border-right: none; transition: all .18s; clip-path: polygon(10px 0%,100% 0%,100% 100%,0% 100%); position: relative; overflow: hidden; }
+.btn-link-body::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 2px; background: var(--acc); transform: scaleY(0); transition: transform .2s; }
+.btn-link:hover .btn-link-body::before { transform: scaleY(1); }
+.btn-link:hover .btn-link-body { background: var(--c3); border-color: var(--dim); }
+.btn-link-idx { font-family: var(--font-hud); font-size: 9px; color: var(--dim); min-width: 16px; }
+.btn-link-label { font-family: var(--font-ui); font-size: 13px; font-weight: 600; letter-spacing: 2px; color: var(--text); text-transform: uppercase; transition: color .18s; flex: 1; text-align: left; }
+.btn-link:hover .btn-link-label { color: var(--white); }
+.btn-link-tag { font-family: var(--font-hud); font-size: 8px; letter-spacing: 1px; color: var(--dim); text-transform: uppercase; flex-shrink: 0; }
+.btn-link-arr { width: 38px; background: var(--c3); border: 1px solid var(--line); border-left: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .18s; clip-path: polygon(0% 0%,calc(100% - 8px) 0%,100% 50%,calc(100% - 8px) 100%,0% 100%); }
+.btn-link:hover .btn-link-arr { background: var(--acc); }
+.btn-link-arr svg { width: 12px; height: 12px; stroke: var(--dim); fill: none; stroke-width: 2; transition: stroke .18s; }
+.btn-link:hover .btn-link-arr svg { stroke: var(--c0); }
+
+/* DROPDOWN */
+.dropdown-host { width: 100%; margin-bottom: 5px; }
+.dropdown-body { max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(.4,0,.2,1); }
+.dropdown-body.open { max-height: 200px; }
+.dropdown-inner { margin-top: 2px; border: 1px solid var(--line); border-top: 2px solid var(--acc); background: var(--c1); }
+.drop-item { display: flex; align-items: center; gap: 10px; padding: 12px 18px; text-decoration: none; color: var(--mute); font-family: var(--font-hud); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid var(--line); transition: all .18s; }
+.drop-item:last-child { border-bottom: none; }
+.drop-item::before { content: '›'; color: var(--acc); font-size: 14px; }
+.drop-item:hover { background: rgba(184,255,0,.05); color: var(--acc); padding-left: 26px; }
+
+/* REPORT MODAL */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 800; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal-box { width: 100%; max-width: 440px; background: var(--c1); border: 1px solid var(--line); position: relative; transform: translateY(20px); transition: transform .3s; }
+.modal-overlay.open .modal-box { transform: translateY(0); }
+.modal-corner { position: absolute; top: 0; right: 0; width: 32px; height: 32px; background: var(--acc); clip-path: polygon(100% 0%,0% 0%,100% 100%); }
+.modal-head { padding: 20px 20px 16px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
+.modal-title-text { font-family: var(--font-title); font-size: 12px; letter-spacing: 3px; color: var(--white); }
+.modal-close { background: none; border: 1px solid var(--line); color: var(--mute); width: 28px; height: 28px; cursor: crosshair; font-size: 13px; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+.modal-close:hover { border-color: var(--acc2); color: var(--acc2); }
+.modal-body { padding: 20px; }
+.field { margin-bottom: 13px; }
+.field label { display: block; font-family: var(--font-hud); font-size: 9px; letter-spacing: 2px; color: var(--mute); text-transform: uppercase; margin-bottom: 5px; }
+.field input, .field textarea { width: 100%; background: var(--c0); border: 1px solid var(--line); color: var(--bright); font-family: var(--font-hud); font-size: 12px; padding: 9px 12px; outline: none; transition: border-color .2s; resize: none; }
+.field input:focus, .field textarea:focus { border-color: var(--acc); }
+.field textarea { height: 76px; }
+.btn-submit { width: 100%; background: var(--acc); border: none; color: var(--c0); font-family: var(--font-title); font-size: 11px; letter-spacing: 4px; padding: 14px; cursor: crosshair; clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); transition: all .18s; margin-top: 4px; }
+.btn-submit:hover { background: #ccff22; transform: translateY(-1px); }
+#report-status { font-family: var(--font-hud); font-size: 10px; letter-spacing: 1px; text-align: center; padding-top: 10px; color: var(--acc); display: none; }
+
+/* HUD + FOOTER */
+.hud-corner { position: fixed; bottom: 24px; right: 24px; font-family: var(--font-hud); font-size: 9px; letter-spacing: 2px; color: var(--dim); text-align: right; z-index: 10; line-height: 2; }
+.hud-corner .live { color: var(--acc); animation: blink 1.8s ease-in-out infinite; }
+footer { position: relative; z-index: 1; text-align: center; padding: 16px 24px 36px; font-family: var(--font-hud); font-size: 9px; letter-spacing: 2px; color: var(--dim); border-top: 1px solid var(--line); margin-top: 20px; }
+@media(max-width:480px) { header { padding: 0 16px; } .hud-status { display: none; } .main-title { font-size: 36px; letter-spacing: 5px; } }
+</style>
 </head>
 <body>
+<div class="bg-grid"></div>
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="pre-inner">
-            <div class="pre-hex">
-                <svg viewBox="0 0 100 100"><polygon points="50,2 93,26 93,74 50,98 7,74 7,26"/></svg>
-                <span class="pre-letter">L</span>
-            </div>
-            <div class="pre-name">LUXORIA</div>
-            <div class="pre-track"><div class="pre-fill" id="preBar"></div></div>
-            <div class="pre-pct" id="prePct">0%</div>
+<header>
+  <div class="logo-wrap">
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="15,1 29,9 29,21 15,29 1,21 1,9" stroke="#b8ff00" stroke-width="1.2" fill="rgba(184,255,0,.05)"/>
+      <polygon points="15,6 24,11 24,19 15,24 6,19 6,11" stroke="#b8ff00" stroke-width=".7" fill="none" opacity=".35"/>
+      <line x1="15" y1="1" x2="15" y2="6" stroke="#b8ff00" stroke-width=".8"/>
+      <line x1="29" y1="9" x2="24" y2="11" stroke="#b8ff00" stroke-width=".8"/>
+      <line x1="29" y1="21" x2="24" y2="19" stroke="#b8ff00" stroke-width=".8"/>
+      <line x1="15" y1="29" x2="15" y2="24" stroke="#b8ff00" stroke-width=".8"/>
+      <line x1="1" y1="21" x2="6" y2="19" stroke="#b8ff00" stroke-width=".8"/>
+      <line x1="1" y1="9" x2="6" y2="11" stroke="#b8ff00" stroke-width=".8"/>
+      <circle cx="15" cy="15" r="3.5" fill="#b8ff00"/>
+      <circle cx="15" cy="15" r="6" stroke="#b8ff00" stroke-width=".5" fill="none" opacity=".4"/>
+    </svg>
+    <span class="logo-text">LUX<em data-t="0">0</em>RIA</span>
+  </div>
+  <div class="hud-status">
+    <div class="hud-dot"></div>
+    <span>STREAMING LIVE</span>
+    <span style="opacity:.3">|</span>
+    <span>CLAN ACTIVE</span>
+  </div>
+  <button class="help-btn" id="helpToggle">
+    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="5"/><path d="M6 7.5V6M6 4.5h.01"/></svg>
+    BANTUAN
+  </button>
+</header>
+
+<div class="help-panel" id="helpPanel">
+  <div class="help-panel-inner">
+    <a href="https://www.instagram.com/feldiantrxahackim_" target="_blank" class="help-item">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      INSTAGRAM
+    </a>
+    <a href="https://wa.me/6283110112769" target="_blank" class="help-item">
+      <svg viewBox="0 0 24 24"><path d="M21 12c0 4.97-4.03 9-9 9a8.96 8.96 0 01-4.6-1.26L3 21l1.3-4.2A8.96 8.96 0 013 12c0-4.97 4.03-9 9-9s9 4.03 9 9z"/><path d="M9.5 10c0-.55.45-1 1-1h.01M13.5 10c0-.55.45-1 1-1h.01M9.5 14s.8 1 2.5 1 2.5-1 2.5-1"/></svg>
+      WHATSAPP
+    </a>
+    <a href="https://discord.gg/Zrsz3zPTTU" target="_blank" class="help-item">
+      <svg viewBox="0 0 24 24"><path d="M20.3 5.5A17.2 17.2 0 0015.8 4a.07.07 0 00-.08.03c-.18.3-.38.7-.52 1a16 16 0 00-4.4 0 9.7 9.7 0 00-.53-1 .07.07 0 00-.08-.03 17.1 17.1 0 00-4.52 1.5.06.06 0 00-.03.03C3.05 10 2.4 14.4 2.73 18.7c.002.02.01.04.03.05a17.3 17.3 0 005.02 2.44c.03.01.06 0 .07-.02.38-.5.73-1.03 1.02-1.58.02-.04 0-.08-.04-.1a11.3 11.3 0 01-1.57-.72c-.04-.03-.04-.09-.01-.12.1-.08.21-.16.31-.25a.07.07 0 01.07-.01c3.3 1.46 6.87 1.46 10.13 0a.07.07 0 01.07.01c.1.08.2.17.31.25.04.03.04.09-.01.12a10.5 10.5 0 01-1.57.72c-.04.02-.05.06-.04.1.3.55.64 1.07 1.02 1.58.02.02.05.03.08.02a17.3 17.3 0 005.02-2.44c.02-.01.03-.03.03-.05.38-4.85-.64-9.06-2.72-12.82a.06.06 0 00-.03-.04zM8.52 16.1c-.95 0-1.74-.84-1.74-1.87s.77-1.88 1.74-1.88c.98 0 1.76.86 1.74 1.88 0 1.03-.77 1.87-1.74 1.87zm6.44 0c-.95 0-1.74-.84-1.74-1.87s.77-1.88 1.74-1.88c.98 0 1.76.86 1.74 1.88 0 1.03-.76 1.87-1.74 1.87z"/></svg>
+      DISCORD
+    </a>
+  </div>
+</div>
+
+<main class="page">
+  <div class="section">
+
+    <div id="view-home">
+      <div class="kill-tag">GAMING CLAN STREAMING HUB</div>
+      <h1 class="main-title">LUX<em data-t="0">0</em>RIA</h1>
+      <p class="tagline">POINT BLANK // COMMUNITY // COMPETE</p>
+
+      <a href="https://sibagi.com/masfel" target="_blank" class="btn-donate">
+        <div class="btn-donate-inner">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          DONASI SEKARANG
         </div>
-    </div>
+      </a>
 
-    <!-- Canvas background -->
-    <canvas id="bgCanvas"></canvas>
-
-    <!-- Scan lines overlay -->
-    <div class="scanlines"></div>
-
-    <!-- Corner UI decorations -->
-    <div class="ui-corner ui-tl">
-        <span class="ui-label">SYS//ONLINE</span>
-    </div>
-    <div class="ui-corner ui-tr">
-        <span class="ui-label" id="clock">00:00:00</span>
-    </div>
-    <div class="ui-corner ui-bl">
-        <span class="ui-label">VER 2.6.0</span>
-    </div>
-    <div class="ui-corner ui-br">
-        <span class="ui-label">LUX-NET</span>
-    </div>
-
-    <!-- Page -->
-    <div class="page" id="page">
-
-        <!-- Header -->
-        <header class="header">
-
-            <!-- Rank badge -->
-            <div class="rank-wrap">
-                <div class="rank-badge">
-                    <div class="rank-hex">
-                        <svg viewBox="0 0 100 100"><polygon points="50,2 93,26 93,74 50,98 7,74 7,26"/></svg>
-                        <img src="Asset/LOXORIA.png" alt="LUXORIA"
-                             id="logoImg"
-                             onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';">
-                        <div class="logo-fallback" id="logoFallback">L</div>
-                    </div>
-                    <div class="rank-rings">
-                        <div class="ring ring-1"></div>
-                        <div class="ring ring-2"></div>
-                        <div class="ring ring-3"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="header-text">
-                <div class="clan-tag">WE ARE</div>
-                <h1 class="title" id="glitchTitle">LUXORIA</h1>
-                <div class="title-sub">
-                    <span class="bar-line"></span>
-                    <span class="sub-text">OFFICIAL LINK</span>
-                    <span class="bar-line"></span>
-                </div>
-                <div class="hero-tagline">Cinematic links, tools & support — ready to launch</div>
-                <div class="hero-ctas">
-                    <a href="https://neogame.id/?codx=LUX0RIA" target="_blank" rel="noopener noreferrer" class="btn-cta">TOPUP ALL GAME</a>
-                    <a href="https://neogame.id/games/char-point-blank-zepetto?codx=LUX0RIA" target="_blank" rel="noopener noreferrer" class="btn-ghost">CHAR PB</a>
-                </div>
-            </div>
-
-            <!-- Stats bar -->
-            <div class="stats-bar">
-                <div class="stat">
-                    <span class="stat-label">STATUS</span>
-                    <span class="stat-val online">● ONLINE</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat">
-                    <span class="stat-label">OWNER</span>
-                    <span class="stat-val">feldiantrxahackim_</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat">
-                    <span class="stat-label">TIKTOK</span>
-                    <span class="stat-val accent">LUX0RIA`</span>
-                </div>
-            </div>
-
-        </header>
-
-        <!-- Game Menu -->
-        <main class="game-menu">
-
-            <!-- Section: GAME MENU -->
-            <section class="menu-section">
-                <div class="menu-section-header">
-                    <span class="menu-bracket">▶</span>
-                    <h2 class="menu-title">GAME MENU</h2>
-                    <span class="menu-bracket">◀</span>
-                </div>
-                <div class="menu-grid">
-                    <!-- Topup All Game -->
-                    <a href="https://neogame.id/?codx=LUX0RIA" target="_blank" rel="noopener noreferrer" class="menu-card" data-color="0,212,255">
-                        <div class="card-bg"></div>
-                        <div class="card-shine"></div>
-                        <div class="card-border-anim"></div>
-                        <div class="menu-card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 6h16M4 12h16M4 18h16"/>
-                                <path d="M8 6v12M16 6v12"/>
-                            </svg>
-                        </div>
-                        <div class="menu-card-text">
-                            <span class="menu-card-title">TOPUP ALL GAME</span>
-                            <span class="menu-card-sub">Beli Voucher</span>
-                        </div>
-                    </a>
-
-                    <!-- Char PB -->
-                    <a href="https://neogame.id/games/char-point-blank-zepetto?codx=LUX0RIA" target="_blank" rel="noopener noreferrer" class="menu-card" data-color="139,92,246">
-                        <div class="card-bg"></div>
-                        <div class="card-shine"></div>
-                        <div class="card-border-anim"></div>
-                        <div class="menu-card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 21c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z"/>
-                                <path d="M9 9l6 6M15 9l-6 6"/>
-                            </svg>
-                        </div>
-                        <div class="menu-card-text">
-                            <span class="menu-card-title">CHAR PB</span>
-                            <span class="menu-card-sub">Beli Karakter</span>
-                        </div>
-                    </a>
-
-                    <!-- PB EVO -->
-                    <a href="https://warevo.games/" target="_blank" rel="noopener noreferrer" class="menu-card" data-color="255,140,0">
-                        <div class="card-bg"></div>
-                        <div class="card-shine"></div>
-                        <div class="card-border-anim"></div>
-                        <div class="menu-card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 3v12"/>
-                                <path d="M8 11l4 4 4-4"/>
-                                <path d="M5 19h14"/>
-                            </svg>
-                        </div>
-                        <div class="menu-card-text">
-                            <span class="menu-card-title">PB EVO</span>
-                            <span class="menu-card-sub">Permainan Terbaru</span>
-                        </div>
-                    </a>
-                </div>
-            </section>
-
-            <!-- Section: SUPPORT MENU -->
-            <section class="menu-section">
-                <div class="menu-section-header">
-                    <span class="menu-bracket">▶</span>
-                    <h2 class="menu-title">SUPPORT MENU</h2>
-                    <span class="menu-bracket">◀</span>
-                </div>
-                <div class="menu-grid">
-                    <!-- Donasi -->
-                    <a href="https://sibagi.com/masfel" target="_blank" rel="noopener noreferrer" class="menu-card featured" data-color="0,180,224">
-                        <div class="card-bg"></div>
-                        <div class="card-shine"></div>
-                        <div class="card-border-anim"></div>
-                        <div class="featured-badge">★ SUPPORT</div>
-                        <div class="menu-card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                            </svg>
-                        </div>
-                        <div class="menu-card-text">
-                            <span class="menu-card-title">DONASI</span>
-                            <span class="menu-card-sub">Dukung Kami</span>
-                        </div>
-                    </a>
-
-                    <!-- Join Clan -->
-                    <a href="https://forms.gle/ERRJdqVwa1ULGAUAA" target="_blank" rel="noopener noreferrer" class="menu-card featured" data-color="0,220,255">
-                        <div class="card-bg"></div>
-                        <div class="card-shine"></div>
-                        <div class="card-border-anim"></div>
-                        <div class="featured-badge">★ REKRUTMEN</div>
-                        <div class="menu-card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-                            </svg>
-                        </div>
-                        <div class="menu-card-text">
-                            <span class="menu-card-title">JOIN CLAN</span>
-                            <span class="menu-card-sub">Bergabunglah</span>
-                        </div>
-                    </a>
-
-                    <!-- Report Member -->
-                    <a href="#" id="reportBtn" class="menu-card alert" data-color="255,34,68">
-                        <div class="card-bg"></div>
-                        <div class="card-shine"></div>
-                        <div class="card-border-anim"></div>
-                        <div class="featured-badge alert">⚠ REPORT</div>
-                        <div class="menu-card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                                <line x1="12" x2="12" y1="9" y2="13"/>
-                                <line x1="12" x2="12.01" y1="17" y2="17"/>
-                            </svg>
-                        </div>
-                        <div class="menu-card-text">
-                            <span class="menu-card-title">REPORT MEMBER</span>
-                            <span class="menu-card-sub">Laporkan Anggota</span>
-                        </div>
-                    </a>
-                </div>
-            </section>
-
-            <!-- Section: COMMUNITY MENU -->
-            <section class="menu-section">
-                <div class="menu-section-header">
-                    <span class="menu-bracket">▶</span>
-                    <h2 class="menu-title">COMMUNITY MENU</h2>
-                    <span class="menu-bracket">◀</span>
-                </div>
-                <div class="menu-grid">
-                    <!-- Discord -->
-                    <a href="https://discord.gg/Zrsz3zPTTU" target="_blank" rel="noopener noreferrer" class="menu-card" data-color="88,101,242">
-                        <div class="card-bg"></div>
-                        <div class="card-shine"></div>
-                        <div class="card-border-anim"></div>
-                        <div class="menu-card-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.44 18.44 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
-                            </svg>
-                        </div>
-                        <div class="menu-card-text">
-                            <span class="menu-card-title">DISCORD</span>
-                            <span class="menu-card-sub">Server Komunitas</span>
-                        </div>
-                    </a>
-
-                    <!-- Instagram -->
-                    <a href="https://www.instagram.com/feldiantrxahackim_/" target="_blank" rel="noopener noreferrer" class="menu-card" data-color="255,60,150">
-                        <div class="card-bg"></div>
-                        <div class="card-shine"></div>
-                        <div class="card-border-anim"></div>
-                        <div class="menu-card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <rect width="20" height="20" x="2" y="2" rx="5"/>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" stroke-width="2.5"/>
-                            </svg>
-                        </div>
-                        <div class="menu-card-text">
-                            <span class="menu-card-title">INSTAGRAM</span>
-                            <span class="menu-card-sub">Follow Kami</span>
-                        </div>
-                    </a>
-
-                    <!-- Bantuan -->
-                    <a href="https://wa.me/6283110112769" target="_blank" rel="noopener noreferrer" class="menu-card" data-color="37,211,102">
-                        <div class="card-bg"></div>
-                        <div class="card-shine"></div>
-                        <div class="card-border-anim"></div>
-                        <div class="menu-card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.33 12.33 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.33 12.33 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                            </svg>
-                        </div>
-                        <div class="menu-card-text">
-                            <span class="menu-card-title">BANTUAN</span>
-                            <span class="menu-card-sub">Chat Sekarang</span>
-                        </div>
-                    </a>
-                </div>
-            </section>
-
-        </main>
-
-        <!-- Report Modal -->
-        <div id="reportModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title">REPORT MEMBER</h2>
-                    <button id="closeModal" class="modal-close" aria-label="Close">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                    </button>
-                </div>
-                <form id="reportForm" class="report-form" action="https://formsubmit.co/officialclanlux0ria@gmail.com" method="POST" target="submitFrame" enctype="multipart/form-data">
-                    <input type="hidden" name="_subject" value="REPORT MEMBER LUXORIA">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
-                    <div class="form-group">
-                        <label for="memberName" class="form-label">NAMA MEMBER</label>
-                        <input type="text" id="memberName" name="memberName" class="form-input" placeholder="Masukkan nama member..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="reporterName" class="form-label">NAMA PELAPOR</label>
-                        <input type="text" id="reporterName" name="reporterName" class="form-input" placeholder="Masukkan nama Anda..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact" class="form-label">KONTAK/WA (Opsional)</label>
-                        <input type="text" id="contact" name="contact" class="form-input" placeholder="Contoh: 0812xxxx atau @username">
-                    </div>
-                    <div class="form-group">
-                        <label for="problem" class="form-label">MASALAH APA YANG MEMBER LAKUKAN?</label>
-                        <textarea id="problem" name="problem" class="form-textarea" rows="4" placeholder="Jelaskan masalah yang dilakukan member..." required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="evidence" class="form-label">BUKTI FOTO/VIDEO</label>
-                        <div class="file-upload">
-                            <input type="file" id="evidence" name="evidence" class="file-input" accept="image/*,video/*">
-                            <div class="file-label">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                                    <polyline points="17 8 12 3 7 8"/>
-                                    <line x1="12" x2="12" y1="3" y2="15"/>
-                                </svg>
-                                <span>Pilih file bukti, lalu lihat preview di bawah.</span>
-                                <span class="file-hint">Maksimal 10MB. Tipe: JPG, PNG, MP4.</span>
-                            </div>
-                            <div id="filePreview" class="file-preview"></div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-submit">
-                        <span class="btn-text">KIRIM REPORT</span>
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-                    </button>
-                </form>
-            </div>
+      <div class="viewmore-wrap">
+        <button class="btn-viewmore" id="btnViewMore">LIHAT SEMUA MENU</button>
+        <div class="vm-arrows">
+          <div class="vm-arr"></div>
+          <div class="vm-arr"></div>
+          <div class="vm-arr"></div>
         </div>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-divider">
-                <div class="fdiv-line"></div>
-                <div class="fdiv-diamond"></div>
-                <div class="fdiv-line"></div>
-            </div>
-            <p class="footer-copy">© 2026 <span>feldiantrxahackim_</span> · OWNER LUX0RIA`</p>
-            <p class="footer-sys">SYSTEM OPERATIONAL ·LINK OFFICIAL ·SUPPORT 24/7</p>
-        </footer>
-
+      </div>
     </div>
 
-    <!-- Scroll top -->
-    <button id="scrollTop" aria-label="Scroll to top">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
-    </button>
+    <div id="view-menu">
+      <div class="menu-header">
+        <span class="menu-hud">// MENU — LUX0RIA</span>
+        <button class="btn-back" id="btnBack">← KEMBALI</button>
+      </div>
 
-    <iframe name="submitFrame" style="display:none;"></iframe>
-    <script src="script.js"></script>
+      <a href="https://neogame.id/?codx=LUX0RIA" target="_blank" class="btn-link">
+        <div class="btn-link-body"><span class="btn-link-idx">01</span><span class="btn-link-label">TOP UP ALL GAME</span><span class="btn-link-tag">NEOGAME</span></div>
+        <div class="btn-link-arr"><svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4"/></svg></div>
+      </a>
+
+      <a href="https://neogame.id/games/char-point-blank-zepetto?codx=LUX0RIA" target="_blank" class="btn-link">
+        <div class="btn-link-body"><span class="btn-link-idx">02</span><span class="btn-link-label">CHAR POINT BLANK</span><span class="btn-link-tag">NEOGAME</span></div>
+        <div class="btn-link-arr"><svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4"/></svg></div>
+      </a>
+
+      <div class="dropdown-host">
+        <button class="btn-link" id="pbToggle" style="width:100%;text-align:left">
+          <div class="btn-link-body"><span class="btn-link-idx">03</span><span class="btn-link-label">PB PRIVATE</span><span class="btn-link-tag" id="pbTag">SELECT ▾</span></div>
+          <div class="btn-link-arr"><svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4"/></svg></div>
+        </button>
+        <div class="dropdown-body" id="pbDropdown">
+          <div class="dropdown-inner">
+            <a href="https://warevo.games/" target="_blank" class="drop-item">PB EVO — WAREVO.GAMES</a>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://forms.gle/ERRJdqVwa1ULGAUAA" target="_blank" class="btn-link">
+        <div class="btn-link-body"><span class="btn-link-idx">04</span><span class="btn-link-label">JOIN CLAN</span><span class="btn-link-tag">FORM</span></div>
+        <div class="btn-link-arr"><svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4"/></svg></div>
+      </a>
+
+      <button class="btn-link" id="btnReport" style="text-align:left">
+        <div class="btn-link-body"><span class="btn-link-idx">05</span><span class="btn-link-label">REPORT MEMBER</span><span class="btn-link-tag">EMAIL</span></div>
+        <div class="btn-link-arr"><svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4"/></svg></div>
+      </button>
+
+      <a href="https://discord.gg/Zrsz3zPTTU" target="_blank" class="btn-link">
+        <div class="btn-link-body"><span class="btn-link-idx">06</span><span class="btn-link-label">DISCORD SERVER</span><span class="btn-link-tag">JOIN</span></div>
+        <div class="btn-link-arr"><svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4"/></svg></div>
+      </a>
+
+      <a href="https://www.instagram.com/feldiantrxahackim_" target="_blank" class="btn-link">
+        <div class="btn-link-body"><span class="btn-link-idx">07</span><span class="btn-link-label">INSTAGRAM</span><span class="btn-link-tag">FOLLOW</span></div>
+        <div class="btn-link-arr"><svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4"/></svg></div>
+      </a>
+    </div>
+
+  </div>
+  <footer>© 2024 LUX0RIA GAMING CLAN &nbsp;|&nbsp; <span style="color:var(--acc)">PB // STREAMING // COMMUNITY</span></footer>
+</main>
+
+<div class="hud-corner">
+  <div class="live">● LIVE</div>
+  <div id="hud-time">--:--:--</div>
+  <div>LUX0RIA.GG</div>
+</div>
+
+<div class="modal-overlay" id="reportModal">
+  <div class="modal-box">
+    <div class="modal-corner"></div>
+    <div class="modal-head">
+      <span class="modal-title-text">// REPORT MEMBER</span>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="reportForm">
+        <div class="field"><label>Nama Member</label><input type="text" name="member" placeholder="IGN / Username" required></div>
+        <div class="field"><label>Email Anda</label><input type="email" name="email" placeholder="email@anda.com" required></div>
+        <div class="field"><label>Deskripsi Pelanggaran</label><textarea name="desc" placeholder="Jelaskan secara detail..." required></textarea></div>
+        <div class="field"><label>Link Bukti (Foto / Video URL)</label><input type="url" name="evidence" placeholder="https://drive.google.com/..."></div>
+        <button type="submit" class="btn-submit">KIRIM REPORT</button>
+        <div id="report-status">✓ REPORT TERKIRIM — TERIMA KASIH</div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+$('helpToggle').addEventListener('click', e => { e.stopPropagation(); $('helpPanel').classList.toggle('open'); });
+document.addEventListener('click', e => { if (!$('helpPanel').contains(e.target) && e.target !== $('helpToggle')) $('helpPanel').classList.remove('open'); });
+
+const homeV = $('view-home'), menuV = $('view-menu');
+let mOpen = false;
+
+$('btnViewMore').addEventListener('click', () => {
+  if (mOpen) return;
+  mOpen = true;
+  homeV.classList.add('exit');
+  setTimeout(() => { homeV.style.display = 'none'; menuV.style.display = 'flex'; requestAnimationFrame(() => menuV.classList.add('enter')); }, 280);
+});
+
+$('btnBack').addEventListener('click', () => {
+  mOpen = false;
+  menuV.classList.remove('enter');
+  setTimeout(() => { menuV.style.display = 'none'; homeV.style.display = 'flex'; requestAnimationFrame(() => homeV.classList.remove('exit')); }, 280);
+});
+
+$('pbToggle').addEventListener('click', e => {
+  e.preventDefault();
+  const dd = $('pbDropdown'), t = $('pbTag');
+  const o = dd.classList.toggle('open');
+  t.textContent = o ? 'PILIH ▴' : 'SELECT ▾';
+});
+document.addEventListener('click', e => { if (!$('pbToggle').contains(e.target)) { $('pbDropdown').classList.remove('open'); $('pbTag').textContent = 'SELECT ▾'; } });
+
+$('btnReport').addEventListener('click', () => $('reportModal').classList.add('open'));
+$('modalClose').addEventListener('click', () => $('reportModal').classList.remove('open'));
+$('reportModal').addEventListener('click', e => { if (e.target === $('reportModal')) $('reportModal').classList.remove('open'); });
+
+$('reportForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target;
+  const body = `Nama Member: ${f.member.value}\n\nEmail Pelapor: ${f.email.value}\n\nPelanggaran:\n${f.desc.value}\n\nBukti: ${f.evidence.value}`;
+  window.location.href = `mailto:officialclanlux0ria@gmail.com?subject=REPORT%20MEMBER%3A%20${encodeURIComponent(f.member.value)}&body=${encodeURIComponent(body)}`;
+  const s = $('report-status'); s.style.display = 'block'; f.reset();
+  setTimeout(() => { s.style.display = 'none'; $('reportModal').classList.remove('open'); }, 3000);
+});
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('reportModal').classList.remove('open'); $('helpPanel').classList.remove('open'); } });
+
+(function tick() {
+  const t = new Date().toLocaleTimeString('id-ID', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const el = $('hud-time'); if (el) el.textContent = t;
+  setTimeout(tick, 1000);
+})();
+</script>
 </body>
 </html>
