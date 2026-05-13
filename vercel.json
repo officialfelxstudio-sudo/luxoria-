@@ -1,0 +1,15 @@
+{
+  "projectId": "",
+  "org": "",
+  "buildCommand": "echo 'Static site - no build needed'",
+  "outputDirectory": ".",
+  "env": [],
+  "regions": ["sin1"],
+  "functions": {},
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-name: Netlify Auto Deploy
+name: Vercel Auto Deploy
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Build and Deploy to Netlify
+    name: Build and Deploy to Vercel
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -18,11 +18,13 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Netlify CLI
-        run: npm install -g netlify-cli
+      - name: Install Vercel CLI
+        run: npm install -g vercel
 
-      - name: Deploy to Netlify (production)
+      - name: Deploy to Vercel (production)
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          netlify deploy --prod --dir=. --site=${{ secrets.NETLIFY_SITE_ID }}
+          vercel deploy --prod --token=$VERCEL_TOKEN
