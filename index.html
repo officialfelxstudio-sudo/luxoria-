@@ -229,23 +229,19 @@
             <div class="modal-body">
                 <form id="reportForm">
                     <div class="field">
-                        <label>Nama Member</label>
-                        <input type="text" name="member" placeholder="IGN / Username" required>
+                        <label>NAMA PELAKU</label>
+                        <input type="text" name="namaPelaku" placeholder="IGN / Username pelaku" required>
                     </div>
                     <div class="field">
-                        <label>Email Anda</label>
-                        <input type="email" name="email" placeholder="email@anda.com" required>
+                        <label>DESKRIPSI PELANGGARAN</label>
+                        <textarea name="deskripsi" placeholder="Jelaskan secara detail..." required></textarea>
                     </div>
                     <div class="field">
-                        <label>Deskripsi Pelanggaran</label>
-                        <textarea name="desc" placeholder="Jelaskan secara detail..." required></textarea>
-                    </div>
-                    <div class="field">
-                        <label>Link Bukti (Foto / Video URL)</label>
-                        <input type="url" name="evidence" placeholder="https://drive.google.com/...">
+                        <label>BUKTI FILE FOTO/VIDEO</label>
+                        <input type="file" name="buktiFile" accept="image/*,video/*" required>
                     </div>
                     <button type="submit" class="btn-submit">KIRIM REPORT</button>
-                    <div id="report-status">✓ REPORT TERKIRIM — TERIMA KASIH</div>
+                    <div id="report-status" style="display: none;">✓ TERIMA KASIH SUDAH MELAPOR — REPORT ANDA TELAH TERKIRIM</div>
                 </form>
             </div>
         </div>

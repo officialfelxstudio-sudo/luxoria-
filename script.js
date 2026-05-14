@@ -71,11 +71,18 @@ $('btnViewMore').addEventListener('click', () => {
     requestAnimationFrame(() => {
       menuV.classList.add('enter');
     });
-  }, 280); // Match CSS transition duration
+  }, 400); // Match CSS transition duration
+  
+  // Reset flag after animation completes
+  setTimeout(() => {
+    mOpen = false;
+  }, 800);
 });
 
 $('btnBack').addEventListener('click', () => {
-  mOpen = false;
+  if (mOpen) return; // Prevent multiple simultaneous transitions
+  
+  mOpen = true;
   
   // Trigger menu exit animation
   menuV.classList.remove('enter');
@@ -89,7 +96,12 @@ $('btnBack').addEventListener('click', () => {
     requestAnimationFrame(() => {
       homeV.classList.remove('exit');
     });
-  }, 280);
+  }, 400); // Match CSS transition duration
+  
+  // Reset flag after animation completes
+  setTimeout(() => {
+    mOpen = false;
+  }, 800);
 });
 
 /* ========================================
@@ -156,16 +168,15 @@ $('reportModal').addEventListener('click', e => {
 
 /**
  * Report form handling:
- * - Gather form data
+ * - Gather form data (nama pelaku, deskripsi, file bukti)
  * - Generate mailto: link with all info
  * - Show success message
  * - Auto close after 3 seconds
  * 
  * Form Fields:
- * - member: Name of member being reported
- * - email: Reporter's email
- * - desc: Description of violation
- * - evidence: URL link to proof (photo/video)
+ * - namaPelaku: Name of the perpetrator
+ * - deskripsi: Description of violation
+ * - buktiFile: File upload (photo/video)
  * 
  * Email Target: officialclanlux0ria@gmail.com
  */
@@ -174,12 +185,23 @@ $('reportForm').addEventListener('submit', e => {
   e.preventDefault();
   
   const form = e.target;
+  const fileInput = form.buktiFile;
+  
+  // Check if file is selected
+  if (!fileInput.files[0]) {
+    alert('Harap pilih file bukti (foto/video)');
+    return;
+  }
+  
+  const file = fileInput.files[0];
+  const fileName = file.name;
+  const fileSize = (file.size / 1024 / 1024).toFixed(2) + ' MB';
   
   // Build email body with form data
-  const body = `Nama Member: ${form.member.value}\n\nEmail Pelapor: ${form.email.value}\n\nPelanggaran:\n${form.desc.value}\n\nBukti: ${form.evidence.value}`;
+  const body = `NAMA PELAKU: ${form.namaPelaku.value}\n\nDESKRIPSI PELANGGARAN:\n${form.deskripsi.value}\n\nBUKTI FILE:\n- Nama File: ${fileName}\n- Ukuran: ${fileSize}\n- Tipe: ${file.type}\n\n*Catatan: File bukti akan dikirim sebagai attachment terpisah`;
   
   // Generate and trigger mailto: link
-  window.location.href = `mailto:officialclanlux0ria@gmail.com?subject=REPORT%20MEMBER%3A%20${encodeURIComponent(form.member.value)}&body=${encodeURIComponent(body)}`;
+  window.location.href = `mailto:officialclanlux0ria@gmail.com?subject=REPORT%20PELANGGARAN%3A%20${encodeURIComponent(form.namaPelaku.value)}&body=${encodeURIComponent(body)}`;
   
   // Show success message
   const statusEl = $('report-status');
@@ -188,11 +210,11 @@ $('reportForm').addEventListener('submit', e => {
   // Reset form
   form.reset();
   
-  // Auto close after 3 seconds
+  // Auto close after 4 seconds
   setTimeout(() => {
     statusEl.style.display = 'none';
     $('reportModal').classList.remove('open');
-  }, 3000);
+  }, 4000);
 });
 
 /* ========================================
