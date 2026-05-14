@@ -58,50 +58,24 @@ $('btnViewMore').addEventListener('click', () => {
   if (mOpen) return; // Prevent multiple simultaneous transitions
   
   mOpen = true;
-  
-  // Trigger home exit animation
+  menuV.classList.add('enter');
   homeV.classList.add('exit');
   
-  // After animation completes, swap views
-  setTimeout(() => {
-    homeV.style.display = 'none';
-    menuV.style.display = 'flex';
-    
-    // Trigger reflow & menu enter animation
-    requestAnimationFrame(() => {
-      menuV.classList.add('enter');
-    });
-  }, 400); // Match CSS transition duration
-  
-  // Reset flag after animation completes
   setTimeout(() => {
     mOpen = false;
-  }, 800);
+  }, 500);
 });
 
 $('btnBack').addEventListener('click', () => {
   if (mOpen) return; // Prevent multiple simultaneous transitions
   
   mOpen = true;
-  
-  // Trigger menu exit animation
+  homeV.classList.remove('exit');
   menuV.classList.remove('enter');
   
-  // After animation completes, swap views back
-  setTimeout(() => {
-    menuV.style.display = 'none';
-    homeV.style.display = 'flex';
-    
-    // Trigger reflow & home enter animation
-    requestAnimationFrame(() => {
-      homeV.classList.remove('exit');
-    });
-  }, 400); // Match CSS transition duration
-  
-  // Reset flag after animation completes
   setTimeout(() => {
     mOpen = false;
-  }, 800);
+  }, 500);
 });
 
 /* ========================================
@@ -205,6 +179,7 @@ $('reportForm').addEventListener('submit', e => {
   
   // Show success message
   const statusEl = $('report-status');
+  statusEl.textContent = '✓ Silakan lanjutkan pengiriman di aplikasi email Anda.';
   statusEl.style.display = 'block';
   
   // Reset form
