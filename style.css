@@ -209,9 +209,9 @@ header::after {
 
 /* Help Button */
 .help-btn {
-  background: none;
-  border: 1px solid var(--line);
-  color: var(--mute);
+  background: rgba(10, 12, 16, 0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--bright);
   font-family: var(--font-hud);
   font-size: 12px;
   letter-spacing: 2px;
@@ -222,14 +222,14 @@ header::after {
   align-items: center;
   gap: 8px;
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, .5);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
 }
 
 .help-btn:hover {
   border-color: var(--acc);
   color: var(--acc);
-  background: rgba(184, 255, 0, .05);
-  box-shadow: 0 6px 16px rgba(184, 255, 0, .2);
+  background: rgba(30, 38, 46, .95);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .3);
 }
 
 .help-btn:active {
@@ -351,13 +351,14 @@ header::after {
 #view-home,
 #view-menu {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   will-change: opacity, transform;
+  transform: translateY(-50%);
 }
 
 #view-home {
@@ -367,7 +368,7 @@ header::after {
 
 #view-home.exit {
   opacity: 0;
-  transform: translateX(-60px) scale(0.95);
+  transform: translate(-60px, -50%) scale(0.95);
   pointer-events: none;
   z-index: 1;
 }
@@ -377,7 +378,7 @@ header::after {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateX(60px) scale(0.95);
+  transform: translate(60px, -50%) scale(0.95);
   transition: opacity .4s cubic-bezier(0.4, 0, 0.2, 1), transform .4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -385,7 +386,7 @@ header::after {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateX(0) scale(1);
+  transform: translate(0, -50%) scale(1);
   z-index: 2;
 }
 
@@ -513,25 +514,29 @@ header::after {
 }
 
 .btn-viewmore {
-  background: none;
-  border: none;
+  background: rgba(10, 12, 16, 0.92);
+  border: 1px solid rgba(255,255,255,0.08);
   font-family: var(--font-hud);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 3px;
   color: var(--bright);
   cursor: crosshair;
-  padding: 8px 18px;
+  padding: 10px 20px;
   text-transform: uppercase;
-  transition: color .2s;
+  transition: color .2s, transform .2s, box-shadow .2s, background .2s;
   display: flex;
   align-items: center;
   gap: 8px;
+  border-radius: 12px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .25);
 }
 
 .btn-viewmore:hover {
   color: var(--acc);
+  background: rgba(28, 34, 46, 0.9);
 }
+
 
 .btn-viewmore:active {
   transform: scale(0.92);
@@ -600,8 +605,8 @@ header::after {
 }
 
 .btn-back {
-  background: none;
-  border: 1px solid rgba(72, 77, 90, 0.95);
+  background: rgba(10, 12, 16, 0.92);
+  border: 1px solid rgba(255,255,255,0.08);
   color: var(--bright);
   font-family: var(--font-hud);
   font-size: 12px;
@@ -611,14 +616,14 @@ header::after {
   cursor: crosshair;
   transition: all .2s;
   clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, .5);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .22);
 }
 
 .btn-back:hover {
   border-color: var(--acc);
   color: var(--acc);
-  background: rgba(184, 255, 0, .08);
-  box-shadow: 0 6px 18px rgba(184, 255, 0, .24);
+  background: rgba(30, 38, 46, .95);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, .28);
 }
 
 .btn-back:active {
@@ -947,6 +952,7 @@ header::after {
   clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
   transition: all .18s;
   margin-top: 4px;
+  box-shadow: 0 14px 36px rgba(184, 255, 0, .26);
 }
 
 .btn-submit:hover {
